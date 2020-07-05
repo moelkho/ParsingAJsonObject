@@ -1,9 +1,7 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONArray;
 
 public class AppCtr {
 
@@ -15,10 +13,7 @@ public class AppCtr {
         
         JSONObject sortie = Utilitaire.retournerSortie(terrain);
         
-        Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie3.json");
-        
-        
-        
-    }
-    
+        Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie4.json");
+   
+    }  
 }
