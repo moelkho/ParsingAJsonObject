@@ -47,9 +47,7 @@ public class Utilitaire {
             lot = lotissements.getJSONObject(i);
             
             description = lot.getString("description");
-            //superficie = lot.getDouble("superficie");
-           // nbreDroitPassage = lot.getInt("nombre_droits_passage");
-            //nbreDeService = (lot.getInt("nombre_services"))+2;
+           
             valeurParLot = calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
             montantDroitsPassage = calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
             montantServices = calculerMontantServices(type_terrain, lot);
@@ -78,7 +76,7 @@ public class Utilitaire {
                 
         double valeurParLot=0, superficie;
         superficie = lot.getDouble("superficie");
-           //DecimalFormat df = new DecimalFormat("#.###");
+           //DecimalFormat df = new DecimalFormat("#.##");
             
 //traitement terrain agricole
             if(type_terrain == 0)

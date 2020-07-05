@@ -1,9 +1,7 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONArray;
 
 public class AppCtr {
 
@@ -20,9 +18,6 @@ public class AppCtr {
         System.out.println(sortie);
         
         Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie4.json");
-        
-        
-        
-    }
-    
+   
+    }  
 }
