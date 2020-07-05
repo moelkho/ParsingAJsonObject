@@ -9,13 +9,17 @@ public class AppCtr {
 
     public static void main(String[] args) throws IOException {
       
-        String json = Utilitaire.loadJsonIntoString("jsonFiles/entree.json");
-        
+        String json = Utilitaire.loadJsonIntoString("jsonFiles/test1.json");
+       
+      
+//        
         JSONObject terrain  = JSONObject.fromObject(json);
+  
         
         JSONObject sortie = Utilitaire.retournerSortie(terrain);
+        System.out.println(sortie);
         
-        Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie3.json");
+        Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie4.json");
         
         
         
