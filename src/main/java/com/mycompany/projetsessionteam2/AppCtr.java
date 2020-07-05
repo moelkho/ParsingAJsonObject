@@ -7,7 +7,7 @@ public class AppCtr {
 
     public static void main(String[] args) throws IOException {
       
-        String json = Utilitaire.loadJsonIntoString("jsonFiles/test1.json");
+        String json = Utilitaire.loadJsonIntoString("jsonFiles/entree.json");
        
       
 //        
@@ -15,7 +15,7 @@ public class AppCtr {
   
         
         JSONObject sortie = Utilitaire.retournerSortie(terrain);
-        System.out.println(sortie);
+       
         
         Utilitaire.saveJsonIntoFile(sortie.toString(0), "jsonFiles/sortie4.json");
    

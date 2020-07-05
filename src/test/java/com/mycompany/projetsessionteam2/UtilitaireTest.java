@@ -67,6 +67,7 @@ public class UtilitaireTest {
         String content = "{\"cle\" : \"valeur\"}";
         String filePath = "jsonFiles/test3.json";
         
+        
         Utilitaire.saveJsonIntoFile(content, filePath);
        
       
@@ -75,18 +76,18 @@ public class UtilitaireTest {
 //    /**
 //     * Test of retournerSortie method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
-//        System.out.println("retournerSortie");
-//       JSONObject terrain ;
-//        
-//       JSONParser parser = new JSONParser();
-//       terrain =  (net.sf.json.JSONObject) parser.parse(new FileReader("jsonFiles/entree.json"));
-//        JSONObject expResult =( net.sf.json.JSONObject ) parser.parse(new FileReader("jsonFiles/sortie.json"));
-//        net.sf.json.JSONObject result = Utilitaire.retournerSortie(terrain);
-//        assertEquals(expResult, result);
-//       
-//    }
+    @Test
+    public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
+        System.out.println("retournerSortie");
+       JSONObject terrain ;
+        
+       JSONParser parser = new JSONParser();
+       terrain =  (net.sf.json.JSONObject) parser.parse(new FileReader("jsonFiles/entree.json"));
+        JSONObject expResult =( net.sf.json.JSONObject ) parser.parse(new FileReader("jsonFiles/sortie.json"));
+        net.sf.json.JSONObject result = Utilitaire.retournerSortie(terrain);
+        assertEquals(expResult, result);
+       
+    }
 //
 //    /**
 //     * Test of calculerMontantValeurParLot method, of class Utilitaire.
@@ -179,15 +180,15 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerMontantServices method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerMontantServices() {
-//        System.out.println("calculerMontantServices");
-//        int type_terrain = 0;
-//        JSONObject lot = null;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
-//        assertEquals(expResult, result, 0.0);
-//     
-//    }
-//    
+    @Test
+    public void testCalculerMontantServices() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 0;
+        JSONObject lot = null;
+        double expResult = 0.0;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
+    
 }
