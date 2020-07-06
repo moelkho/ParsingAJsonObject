@@ -9,12 +9,7 @@ public class AppCtr {
       
         String json = Utilitaire.loadJsonIntoString("jsonFiles/entree.json");
         
-        
-       
-      
-//        
         JSONObject terrain  = JSONObject.fromObject(json);
-        
         
         JSONObject sortie = Utilitaire.retournerSortie(terrain);
        

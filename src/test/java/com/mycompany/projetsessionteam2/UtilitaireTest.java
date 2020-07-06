@@ -55,8 +55,7 @@ public class UtilitaireTest {
         String expResult = "{\"name\":\"admin\"}";
         String result = Utilitaire.loadJsonIntoString(filePath);
         assertEquals(expResult, result);
-        
-        
+       
     }
 
     /**
@@ -67,7 +66,6 @@ public class UtilitaireTest {
         System.out.println("saveJsonIntoFile");
         String content = "{\"cle\" : \"valeur\"}";
         String filePath = "jsonFiles/test3.json";
-        
         
         Utilitaire.saveJsonIntoFile(content, filePath);
        
