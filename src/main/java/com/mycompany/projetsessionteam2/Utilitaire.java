@@ -53,13 +53,14 @@ public class Utilitaire {
             description = lot.getString("description");
             
             valeurParLot = calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
-            System.out.println(i+" val par lot "+valeurParLot);
+//            System.out.println(i+" val par lot "+valeurParLot);
+//            System.out.println(i+" val par lot "+df.format(valeurParLot));
             montantDroitsPassage = calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
-            System.out.println(i+" Passage "+montantDroitsPassage);
+//            System.out.println(i+" Passage "+df.format(montantDroitsPassage));
             montantServices = calculerMontantServices(type_terrain, lot);
-            System.out.println(i+" Service "+montantServices);
+//            System.out.println(i+" Service "+montantServices);
             valFonciereParLot = valeurParLot + montantDroitsPassage + montantServices;
-            System.out.println(i+" valFonciereParLot "+valFonciereParLot);
+//            System.out.println(i+" valFonciereParLot "+valFonciereParLot);
             valFociereTerrainTemp += valFonciereParLot;
             
             lotSortie.accumulate("description", description);
