@@ -8,6 +8,7 @@ package com.mycompany.projetsessionteam2;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.test.JSONAssert;
 import org.json.simple.parser.JSONParser;
@@ -79,12 +80,67 @@ public class UtilitaireTest {
     @Test
     public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
         System.out.println("retournerSortie");
-       JSONObject terrain ;
+          JSONObject terrain = new JSONObject();
+       terrain.put("type_terrain", 2);
+       terrain.put("prix_m2_min", "3.45 $");
+        terrain.put("prix_m2_max", "7.00 $");
         
-       JSONParser parser = new JSONParser();
-       terrain =  (net.sf.json.JSONObject) parser.parse(new FileReader("jsonFiles/entree.json"));
-        JSONObject expResult =( net.sf.json.JSONObject ) parser.parse(new FileReader("jsonFiles/sortie.json"));
-        net.sf.json.JSONObject result = Utilitaire.retournerSortie(terrain);
+        JSONArray lotissement = new JSONArray();
+        
+        JSONObject lot1 = new JSONObject();
+        lot1.put("description","lot 1");
+        lot1.put("nombre_droits_passage", 4);
+        lot1.put("nombre_services", 0);
+        lot1.put("superficie", 465);
+        lot1.put("date_mesure","2015-10-14");
+        
+        JSONObject lot2 = new JSONObject();
+        lot2.put("description","lot 2");
+        lot2.put("nombre_droits_passage", 0);
+        lot2.put("nombre_services", 1);
+        lot2.put("superficie", 1082);
+        lot2.put("date_mesure","2015-12-15");
+        
+        JSONObject lot3 = new JSONObject();
+        lot3.put("description","lot 3");
+        lot3.put("nombre_droits_passage", 8);
+        lot3.put("nombre_services", 3);
+        lot3.put("superficie", 3333);
+        lot3.put("date_mesure","2013-06-20");
+        
+        lotissement.add(lot1);
+        lotissement.add(lot2);
+        lotissement.add(lot3);
+        terrain.put("lotissements", lotissement);
+                
+       
+      
+        JSONObject expResult = new JSONObject();
+        expResult.put("valeur_fonciere_totale",16943.57);
+        expResult.put("taxe_scolaire",203.32284);
+        expResult.put("taxe_scolaire",203.32284);
+        expResult.put("taxe_ municipale",423.58925);
+        JSONArray lotissementSortie = new JSONArray();
+        
+        JSONObject lotSortie1= new JSONObject();
+        lotSortie1.put("description","lot 1");
+        lotSortie1.put("valeur_par_lot",2802);
+        
+        JSONObject lotSortie2= new JSONObject();
+        lotSortie2.put("description","lot 2");
+        lotSortie2.put("valeur_par_lot",12574);
+        
+        JSONObject lotSortie3= new JSONObject();
+        lotSortie3.put("description","lot 3");
+        lotSortie3.put("valeur_par_lot",833.7999999999993);
+         lotissementSortie.add(lotSortie1);
+         lotissementSortie.add(lotSortie2);
+         lotissementSortie.add(lotSortie3);
+         
+         expResult.put("lotissements",lotissementSortie);
+        
+        
+        JSONObject result = Utilitaire.retournerSortie(terrain);
         assertEquals(expResult, result);
        
     }
@@ -181,14 +237,100 @@ public class UtilitaireTest {
 //     * Test of calculerMontantServices method, of class Utilitaire.
 //     */
     @Test
-    public void testCalculerMontantServices() {
+    public void testCalculerMontantServices2AvecSuperficie500Etmoins() {
         System.out.println("calculerMontantServices");
-        int type_terrain = 0;
-        JSONObject lot = null;
-        double expResult = 0.0;
+        int type_terrain = 2;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",500);
+        lot.put("nombre_services", 3);
+        
+        double expResult = 2500;
         double result = Utilitaire.calculerMontantServices(type_terrain, lot);
         assertEquals(expResult, result, 0.0);
      
     }
     
+     @Test
+    public void testCalculerMontantServices2AvecSuperficie500EtPlusEtmoinsDe5000() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 2;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",600);
+        lot.put("nombre_services",3);
+        
+        double expResult = 5000;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
+    
+      @Test
+    public void testCalculerMontantServices2AvecSuperficiePlusDe5000() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 2;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",6000);
+        lot.put("nombre_services", 2);
+        
+        double expResult = 5000;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
+//    @Test
+//    public void testCalculerMontantServices1SuperieurA10000() {
+//        System.out.println("calculerMontantServices");
+//        int type_terrain = 1;
+//        JSONObject lot = new JSONObject();
+//        lot.put("superficie",10000);
+//        lot.put("nombre_services", 3);
+//        
+//        double expResult = 4000;
+//        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+//        assertEquals(expResult, result, 0.0);
+//     
+//    }
+    
+      @Test
+    public void testCalculerMontantServices1Entre500Et10000() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 1;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",700);
+        lot.put("nombre_services", 2);
+        
+        double expResult = 2000;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
+    
+    
+     @Test
+    public void testCalculerMontantServices1Moinsde500() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 1;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",250);
+        lot.put("nombre_services", 2);
+        
+        double expResult = 0;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
+    
+       @Test
+    public void testCalculerMontantServices0() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 0;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",6000);
+        lot.put("nombre_services", 2);
+        
+        double expResult = 0;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
 }
