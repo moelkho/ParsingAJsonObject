@@ -277,19 +277,19 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
      
     }
-//    @Test
-//    public void testCalculerMontantServices1SuperieurA10000() {
-//        System.out.println("calculerMontantServices");
-//        int type_terrain = 1;
-//        JSONObject lot = new JSONObject();
-//        lot.put("superficie",10000);
-//        lot.put("nombre_services", 3);
-//        
-//        double expResult = 4000;
-//        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
-//        assertEquals(expResult, result, 0.0);
-//     
-//    }
+    @Test
+    public void testCalculerMontantServices1SuperieurA10000() {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 1;
+        JSONObject lot = new JSONObject();
+        lot.put("superficie",12000);
+        lot.put("nombre_services", 3);
+        
+        double expResult = 5000;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+     
+    }
     
       @Test
     public void testCalculerMontantServices1Entre500Et10000() {

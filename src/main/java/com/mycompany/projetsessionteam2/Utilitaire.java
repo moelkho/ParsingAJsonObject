@@ -118,7 +118,7 @@ public class Utilitaire {
         if (type_terrain == 1) {
             if (superficie < 500) {
                 montantServices = 0* nbreDeService;
-            } else if (superficie >= 500 || superficie <= 10000) {
+            } else if (superficie <= 10000) {
                 montantServices = 500 * nbreDeService;
             } else if(superficie > 10000)  {
                 montantServices = 1000 * nbreDeService;
