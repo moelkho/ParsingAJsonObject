@@ -14,7 +14,7 @@ public class AppCtr {
         JSONObject sortie = Utilitaire.retournerSortie(terrain);
        
         System.out.println(sortie);
-        Utilitaire.saveJsonIntoFile(sortie.toString(), "jsonFiles/sortie4.json");
+        Utilitaire.saveJsonIntoFile(sortie.toString(), "jsonFiles/sortie5.json");
    
     }  
 }
