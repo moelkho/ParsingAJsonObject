@@ -70,7 +70,7 @@ public class Utilitaire {
             valFociereTerrainTemp += valFonciereParLot;
 
             lotSortie.accumulate("description", description);
-            lotSortie.accumulate("valeur_par_lot", df.format(valFonciereParLot) + "$");
+            lotSortie.accumulate("valeur_par_lot", df.format(valFonciereParLot) + " $");
             lotissementSortie.add(lotSortie);
             lotSortie.clear();
         }
@@ -78,9 +78,9 @@ public class Utilitaire {
         taxeScolaire = valFociereTerrainFinal * tauxTaxeScolaire;
         taxeMunicipale = valFociereTerrainFinal * tauxTaxeMunicipale;
 
-        sortie.accumulate("valeur_fonciere_totale", df.format(valFociereTerrainFinal) + "$");
-        sortie.accumulate("taxe_scolaire", df.format(taxeScolaire) + "$");
-        sortie.accumulate("taxe_ municipale", df.format(taxeMunicipale) + "$");
+        sortie.accumulate("valeur_fonciere_totale", df.format(valFociereTerrainFinal) + " $");
+        sortie.accumulate("taxe_scolaire", df.format(taxeScolaire) + " $");
+        sortie.accumulate("taxe_ municipale", df.format(taxeMunicipale) + " $");
         sortie.accumulate("lotissements", lotissementSortie);
 
         return sortie;

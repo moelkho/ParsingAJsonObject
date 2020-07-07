@@ -75,73 +75,73 @@ public class UtilitaireTest {
 //    /**
 //     * Test of retournerSortie method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
-//        System.out.println("retournerSortie");
-//          JSONObject terrain = new JSONObject();
-//       terrain.put("type_terrain", 2);
-//       terrain.put("prix_m2_min", "3.45 $");
-//        terrain.put("prix_m2_max", "7.00 $");
-//        
-//        JSONArray lotissement = new JSONArray();
-//        
-//        JSONObject lot1 = new JSONObject();
-//        lot1.put("description","lot 1");
-//        lot1.put("nombre_droits_passage", 4);
-//        lot1.put("nombre_services", 0);
-//        lot1.put("superficie", 465);
-//        lot1.put("date_mesure","2015-10-14");
-//        
-//        JSONObject lot2 = new JSONObject();
-//        lot2.put("description","lot 2");
-//        lot2.put("nombre_droits_passage", 0);
-//        lot2.put("nombre_services", 1);
-//        lot2.put("superficie", 1082);
-//        lot2.put("date_mesure","2015-12-15");
-//        
-//        JSONObject lot3 = new JSONObject();
-//        lot3.put("description","lot 3");
-//        lot3.put("nombre_droits_passage", 8);
-//        lot3.put("nombre_services", 3);
-//        lot3.put("superficie", 3333);
-//        lot3.put("date_mesure","2013-06-20");
-//        
-//        lotissement.add(lot1);
-//        lotissement.add(lot2);
-//        lotissement.add(lot3);
-//        terrain.put("lotissements", lotissement);
-//                
-//       
-//      
-//        JSONObject expResult = new JSONObject();
-//        expResult.put("valeur_fonciere_totale",16943.57);
+    @Test
+    public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
+        System.out.println("retournerSortie");
+          JSONObject terrain = new JSONObject();
+       terrain.put("type_terrain", 2);
+       terrain.put("prix_m2_min", "3.45 $");
+        terrain.put("prix_m2_max", "7.00 $");
+        
+        JSONArray lotissement = new JSONArray();
+        
+        JSONObject lot1 = new JSONObject();
+        lot1.put("description","lot 1");
+        lot1.put("nombre_droits_passage", 4);
+        lot1.put("nombre_services", 0);
+        lot1.put("superficie", 465);
+        lot1.put("date_mesure","2015-10-14");
+        
+        JSONObject lot2 = new JSONObject();
+        lot2.put("description","lot 2");
+        lot2.put("nombre_droits_passage", 0);
+        lot2.put("nombre_services", 1);
+        lot2.put("superficie", 1082);
+        lot2.put("date_mesure","2015-12-15");
+        
+        JSONObject lot3 = new JSONObject();
+        lot3.put("description","lot 3");
+        lot3.put("nombre_droits_passage", 8);
+        lot3.put("nombre_services", 3);
+        lot3.put("superficie", 3333);
+        lot3.put("date_mesure","2013-06-20");
+        
+        lotissement.add(lot1);
+        lotissement.add(lot2);
+        lotissement.add(lot3);
+        terrain.put("lotissements", lotissement);
+                
+       
+      
+        JSONObject expResult = new JSONObject();
+        expResult.put("valeur_fonciere_totale","16943,57 $");
+        expResult.put("taxe_scolaire","203,32 $");
 //        expResult.put("taxe_scolaire",203.32284);
-//        expResult.put("taxe_scolaire",203.32284);
-//        expResult.put("taxe_ municipale",423.58925);
-//        JSONArray lotissementSortie = new JSONArray();
-//        
-//        JSONObject lotSortie1= new JSONObject();
-//        lotSortie1.put("description","lot 1");
-//        lotSortie1.put("valeur_par_lot",2802);
-//        
-//        JSONObject lotSortie2= new JSONObject();
-//        lotSortie2.put("description","lot 2");
-//        lotSortie2.put("valeur_par_lot",12574);
-//        
-//        JSONObject lotSortie3= new JSONObject();
-//        lotSortie3.put("description","lot 3");
-//        lotSortie3.put("valeur_par_lot",833.7999999999993);
-//         lotissementSortie.add(lotSortie1);
-//         lotissementSortie.add(lotSortie2);
-//         lotissementSortie.add(lotSortie3);
-//         
-//         expResult.put("lotissements",lotissementSortie);
-//        
-//        
-//        JSONObject result = Utilitaire.retournerSortie(terrain);
-//        assertEquals(expResult, result);
-//       
-//    }
+        expResult.put("taxe_ municipale","881,07 $");
+        JSONArray lotissementSortie = new JSONArray();
+        
+        JSONObject lotSortie1= new JSONObject();
+        lotSortie1.put("description","lot 1");
+        lotSortie1.put("valeur_par_lot","2802 $");
+        
+        JSONObject lotSortie2= new JSONObject();
+        lotSortie2.put("description","lot 2");
+        lotSortie2.put("valeur_par_lot","12574 $");
+        
+        JSONObject lotSortie3= new JSONObject();
+        lotSortie3.put("description","lot 3");
+        lotSortie3.put("valeur_par_lot","833,8 $");
+         lotissementSortie.add(lotSortie1);
+         lotissementSortie.add(lotSortie2);
+         lotissementSortie.add(lotSortie3);
+         
+         expResult.put("lotissements",lotissementSortie);
+        
+        
+        JSONObject result = Utilitaire.retournerSortie(terrain);
+        assertEquals(expResult, result);
+       
+    }
 //
 //    /**
 //     * Test of calculerMontantValeurParLot method, of class Utilitaire.

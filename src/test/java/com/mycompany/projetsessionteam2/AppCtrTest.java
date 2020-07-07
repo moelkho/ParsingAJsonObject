@@ -40,13 +40,13 @@ public class AppCtrTest {
     /**
      * Test of main method, of class AppCtr.
      */
-    @Test
-    public void testMain() throws Exception {
-        System.out.println("main");
-        String[] args = null;
-        AppCtr.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-      
-    }
+//    @Test
+//    public void testMain() throws Exception {
+//        System.out.println("main");
+//        String[] args = null;
+//        AppCtr.main(args);
+//        // TODO review the generated test code and remove the default call to fail.
+//      
+//    }
     
 }
