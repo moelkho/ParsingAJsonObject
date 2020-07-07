@@ -17,14 +17,16 @@ public class Utilitaire {
     public static final double valeurDeBase = 733.77;
     public static final int nbreServiceDeBase = 2;
 
-    public static String loadJsonIntoString(String filePath) throws FileNotFoundException, IOException {
+    public static String loadJsonIntoString(String filePath) 
+            throws FileNotFoundException, IOException {
 
         FileInputStream myInputStream = new FileInputStream(filePath);
         return IOUtils.toString(myInputStream, "UTF-8");
 
     }
 
-    public static void saveJsonIntoFile(String content, String filePath) throws IOException {
+    public static void saveJsonIntoFile(String content, String filePath) 
+            throws IOException {
 
         File file = new File(filePath);
         FileUtils.writeStringToFile(file, content, "UTF-8");
