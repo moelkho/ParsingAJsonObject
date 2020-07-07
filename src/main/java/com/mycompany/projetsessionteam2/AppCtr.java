@@ -9,7 +9,7 @@ public class AppCtr {
       
        //Creer le JSONObject terrain
         JSONObject monTerrain = Terrain.creerTerrain();
-              
+        System.out.println(monTerrain.toString()); 
         //Creer le fichier d'entree
         Utilitaire.saveJsonIntoFile(monTerrain.toString(), "c:\\temp\\"+args[0]);
         
