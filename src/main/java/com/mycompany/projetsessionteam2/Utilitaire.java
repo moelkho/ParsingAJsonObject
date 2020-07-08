@@ -13,7 +13,7 @@ import org.apache.commons.io.IOUtils;
 public class Utilitaire {
 
     public static final double TAUXTAXESCOLAIRE = 0.012;
-    public static final double TAUXTAXEMUNICIPALE = 0.052;
+    public static final double TAUXTAXEMUNICIPALE = 0.025;
     public static final double VALEURDEBASE = 733.77;
     public static final int NBRESERVICEDEBASE = 2;
 
