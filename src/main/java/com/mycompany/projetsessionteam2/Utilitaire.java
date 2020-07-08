@@ -42,7 +42,7 @@ public class Utilitaire {
         double prixMax = Double.parseDouble(prixMaxStr);
         double prixMin = Double.parseDouble(prixMinStr);
         
-        //Declarer les diffrente valeur a calculer pour chaque lot et pour le terrain
+        //Declarer les diffrentes valeurs a calculer pour chaque lot et pour le terrain
         double valeurParLot, montantServices, montantDroitsPassage;
         double valFonciereParLot, valFociereTerrainInitial = 0;
         double valFociereFinalTerrain, taxeScolaire, taxeMunicipale;
@@ -58,6 +58,7 @@ public class Utilitaire {
         
         DecimalFormat df = new DecimalFormat("#.##");
 
+        //Parcourir le jsonArray lotissement et calculer les valeurs pour chaque lot
         for (int i = 0; i < lotissements.size(); i++) {
 
             lot = lotissements.getJSONObject(i);
@@ -70,7 +71,8 @@ public class Utilitaire {
             
             valFonciereParLot = valeurParLot + montantDroitsPassage + montantServices;
             valFociereTerrainInitial += valFonciereParLot;
-
+            
+            //Contruire le jsonObject lot et le pousser dans le jsonArray lotissement
             lotSortie.accumulate("description", description);
             lotSortie.accumulate("valeur_par_lot", df.format(valFonciereParLot) + " $");
             lotissementSortie.add(lotSortie);
@@ -79,7 +81,7 @@ public class Utilitaire {
         valFociereFinalTerrain = valFociereTerrainInitial + VALEURDEBASE;
         taxeScolaire = valFociereFinalTerrain * TAUXTAXESCOLAIRE;
         taxeMunicipale = valFociereFinalTerrain * TAUXTAXEMUNICIPALE;
-
+        //contruire l'objet json sortie
         sortie.accumulate("valeur_fonciere_totale", df.format(valFociereFinalTerrain) + " $");
         sortie.accumulate("taxe_scolaire", df.format(taxeScolaire) + " $");
         sortie.accumulate("taxe_ municipale", df.format(taxeMunicipale) + " $");
