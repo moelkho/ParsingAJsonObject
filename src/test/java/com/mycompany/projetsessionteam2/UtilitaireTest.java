@@ -93,7 +93,7 @@ public class UtilitaireTest {
         expResult.put("valeur_fonciere_totale","16943,57 $");
         expResult.put("taxe_scolaire","203,32 $");
 //        expResult.put("taxe_scolaire",203.32284);
-        expResult.put("taxe_ municipale","881,07 $");
+        expResult.put("taxe_ municipale","423,59 $");
         JSONArray lotissementSortie = new JSONArray();
         
         JSONObject lotSortie1= new JSONObject();
