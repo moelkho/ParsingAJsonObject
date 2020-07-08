@@ -1,11 +1,12 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.IOException;
+import java.text.ParseException;
 import net.sf.json.JSONObject;
 
 public class AppCtr {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
       
        //Creer le JSONObject terrain
         JSONObject monTerrain = Terrain.creerTerrain();

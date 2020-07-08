@@ -21,7 +21,7 @@ import net.sf.json.JSONObject;
  */
 public class Terrain {
 
-    public static JSONObject creerTerrain()  {
+    public static JSONObject creerTerrain() throws ParseException  {
         
         JSONObject monTerrain = new JSONObject();
         monTerrain.accumulate("type_terrain", 2);
@@ -42,11 +42,9 @@ public class Terrain {
         
         String dateInString1 = "12-05-2000";
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
-        try {
+        
             Date date1 = dateFormat1.parse(dateInString1);
-        } catch (ParseException ex) {
-            Logger.getLogger(Terrain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
         
         String dateLot1 = df.format(new Date());
         lot.accumulate("date_mesure",dateLot1);
@@ -56,11 +54,9 @@ public class Terrain {
         
         String dateInString2 = "19-10-2013";
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yyyy");
-        try {
+        
             Date date2 = dateFormat2.parse(dateInString2);
-        } catch (ParseException ex) {
-            Logger.getLogger(Terrain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         String dateLot2 = df.format(new Date());
         lot.accumulate("description","lot 2");
         lot.accumulate("nombre_droits_passage",0);
@@ -74,11 +70,9 @@ public class Terrain {
         
         String dateInString3 = "01-04-2009";
         SimpleDateFormat dateFormat3 = new SimpleDateFormat("dd-MM-yyyy");
-        try {
+        
             Date date3 = dateFormat3.parse(dateInString2);
-        } catch (ParseException ex) {
-            Logger.getLogger(Terrain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
         String dateLot3 = df.format(new Date());
         lot.accumulate("description","lot 3");
         lot.accumulate("nombre_droits_passage",8);
