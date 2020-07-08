@@ -63,7 +63,9 @@ public class TerrainTest {
         lot.accumulate("nombre_droits_passage", 0);
         lot.accumulate("nombre_services", 1);
         lot.accumulate("superficie", 1082);
+        
         //Formatter la date en ISO 8601
+        
         lot.accumulate("date_mesure", dateLot2);
         lotissements.add(lot);
         lot.clear();
@@ -80,7 +82,9 @@ public class TerrainTest {
         lot.accumulate("nombre_droits_passage", 8);
         lot.accumulate("nombre_services", 3);
         lot.accumulate("superficie", 3333);
+        
         //Formatter la date en ISO 8601
+        
         lot.accumulate("date_mesure", dateLot3);
         lotissements.add(lot);
         lot.clear();
