@@ -6,48 +6,25 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author admin
- */
+
 public class UtilitaireTest {
     
     public UtilitaireTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+  
 
-    /**
-     * Test of loadJsonIntoString method, of class Utilitaire.
-     */
+   
+    // test de la methode LoadJsonIntoString
+    
     @Test
     public void testLoadJsonIntoString() throws Exception {
         System.out.println("loadJsonIntoString");
@@ -58,9 +35,7 @@ public class UtilitaireTest {
        
     }
 
-    /**
-     * Test of saveJsonIntoFile method, of class Utilitaire.
-     */
+    // test de la methode SaveJsonIntoFile
     @Test
     public void testSaveJsonIntoFile() throws Exception {
         System.out.println("saveJsonIntoFile");
@@ -71,12 +46,13 @@ public class UtilitaireTest {
        
       
     }
-//
-//    /**
-//     * Test of retournerSortie method, of class Utilitaire.
-//     */
+
+    /* test de la methode  RetournerSortie, on construit en dur un objet
+    JSON a l'interieur, cette methode retourne un objet JSON*/ 
+    
     @Test
-    public void testRetournerSortie() throws FileNotFoundException, IOException, ParseException {
+    public void testRetournerSortie() throws FileNotFoundException, 
+            IOException, ParseException {
         System.out.println("retournerSortie");
           JSONObject terrain = new JSONObject();
        terrain.put("type_terrain", 2);
@@ -142,10 +118,8 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
        
     }
-//
-//    /**
-//     * Test of calculerMontantValeurParLot method, of class Utilitaire.
-//     */
+/* test de la methode CalculerMontantValeurParLot lorsque le type du terrain est 
+    2 */
     
           @Test
     public void testCalculerMontantValeurParLot2() {
@@ -156,10 +130,14 @@ public class UtilitaireTest {
         JSONObject lot = new JSONObject();
         lot.put("superficie", 1000);
         double expResult = 4500;
-        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
+        double result = Utilitaire.calculerMontantValeurParLot
+        (type_terrain, prixMin, prixMax, lot);
         assertEquals(expResult, result, 0.0);
        
     }
+    
+    /* test de la methode CalculerMontantValeurParLot lorsque le type du terrain
+    est  1 */
     @Test
     public void testCalculerMontantValeurParLot1() {
         System.out.println("calculerMontantValeurParLot");
@@ -169,11 +147,14 @@ public class UtilitaireTest {
         JSONObject lot = new JSONObject();
         lot.put("superficie", 500.02);
         double expResult = 1750.07;
-        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
+        double result = Utilitaire.calculerMontantValeurParLot
+        (type_terrain, prixMin, prixMax, lot);
         assertEquals(expResult, result, 0.0);
        
     }
     
+    /* test de la methode CalculerMontantValeurParLot lorsque le type du
+    terrain est 0 */
        @Test
     public void testCalculerMontantValeurParLot0() {
         System.out.println("calculerMontantValeurParLot");
@@ -183,14 +164,13 @@ public class UtilitaireTest {
         JSONObject lot = new JSONObject();
         lot.put("superficie", 1000);
         double expResult = 2500;
-        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
+        double result = Utilitaire.calculerMontantValeurParLot
+        (type_terrain, prixMin, prixMax, lot);
         assertEquals(expResult, result, 0.0);
        
     }
-//
-//    /**
-//     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
-//     */
+/* test de la methodeCalculerMontantDroitsPassage lorsque le type du terrain est 
+    2 */
       @Test
     public void testCalculerMontantDroitsPassage2() {
         System.out.println("calculerMontantDroitsPassage");
@@ -200,10 +180,14 @@ public class UtilitaireTest {
         lot.put("nombre_droits_passage",1);
         
         double expResult = -175;
-        double result = Utilitaire.calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
+        double result = Utilitaire.calculerMontantDroitsPassage
+        (type_terrain, valeurParLot, lot);
         assertEquals(expResult, result, 0.0);
        
     }
+    
+    /* test de la methodeCalculerMontantDroitsPassage lorsque le type du terrain
+    est  1 */
      @Test
     public void testCalculerMontantDroitsPassage1() {
         System.out.println("calculerMontantDroitsPassage");
@@ -213,10 +197,14 @@ public class UtilitaireTest {
         lot.put("nombre_droits_passage",3);
         
         double expResult = -25.021000000000072;
-        double result = Utilitaire.calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
+        double result = Utilitaire.calculerMontantDroitsPassage
+        (type_terrain, valeurParLot, lot);
         assertEquals(expResult, result, 0.0);
        
     }
+    
+    /* test de la methodeCalculerMontantDroitsPassage lorsque le type du terrain
+    est  0 */
     @Test
     public void testCalculerMontantDroitsPassage0() {
         System.out.println("calculerMontantDroitsPassage");
@@ -226,14 +214,13 @@ public class UtilitaireTest {
         lot.put("nombre_droits_passage",2);
         
         double expResult = 250;
-        double result = Utilitaire.calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
+        double result = Utilitaire.calculerMontantDroitsPassage
+        (type_terrain, valeurParLot, lot);
         assertEquals(expResult, result, 0.0);
        
     }
-//
-//    /**
-//     * Test of calculerMontantServices method, of class Utilitaire.
-//     */
+/* test de la methode CalculerMontantService lorsque le type du terrain est 
+    2 et la superficie est inferieure a 500 */
     @Test
     public void testCalculerMontantServices2AvecSuperficie500Etmoins() {
         System.out.println("calculerMontantServices");
@@ -248,8 +235,12 @@ public class UtilitaireTest {
      
     }
     
+    /* test de la la methode CalculerMontantService lorsque le type du terrain 
+    est  2 et la superficie est entre 500 et 5000 */
+    
      @Test
-    public void testCalculerMontantServices2AvecSuperficie500EtPlusEtmoinsDe5000() {
+    public void testCalculerMontantServices2AvecSuperficie500EtPlusEtmoinsDe5000() 
+    {
         System.out.println("calculerMontantServices");
         int type_terrain = 2;
         JSONObject lot = new JSONObject();
@@ -262,6 +253,8 @@ public class UtilitaireTest {
      
     }
     
+    /* test de la methode CalculerMontantService lorsque le type du terrain est 
+    2 et la superficie est superieure a 5000 */
       @Test
     public void testCalculerMontantServices2AvecSuperficiePlusDe5000() {
         System.out.println("calculerMontantServices");
@@ -275,6 +268,9 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
      
     }
+    
+    /* test de la methode CalculerMontantService lorsque le type du terrain est 
+    1 et la superficie est superieure a 10000 */
     @Test
     public void testCalculerMontantServices1SuperieurA10000() {
         System.out.println("calculerMontantServices");
@@ -289,6 +285,8 @@ public class UtilitaireTest {
      
     }
     
+    /* test de la methode CalculerMontantService lorsque le type du terrain est 
+    1 et la superficie est entre 500 et 10000 */
       @Test
     public void testCalculerMontantServices1Entre500Et10000() {
         System.out.println("calculerMontantServices");
@@ -303,6 +301,8 @@ public class UtilitaireTest {
      
     }
     
+    /* test de la methode CalculerMontantService lorsque le type du terrain est 
+    1 et la superficie est inferieure a 500 */
     
      @Test
     public void testCalculerMontantServices1Moinsde500() {
@@ -317,7 +317,8 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
      
     }
-    
+    /* test de la methode CalculerMontantService lorsque le type du terrain est 
+    2 et la superficie est inferieure a 500 */
        @Test
     public void testCalculerMontantServices0() {
         System.out.println("calculerMontantServices");
