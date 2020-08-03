@@ -23,6 +23,8 @@ public class AppCtr {
             
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
             
+            GestionErreur.verifierNombreDroitsPassage(terrain);
+            
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
             double prixMax = Utilitaire.obtenirPrixMax(terrain);
