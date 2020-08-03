@@ -11,8 +11,15 @@ public class AppCtr {
       
         
         String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
+        
            
-            JSONObject terrain = Utilitaire.creerJsonObject(json);
+           
+            JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
+            
+            
+            
+            JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
+            System.out.println(terrain);
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
