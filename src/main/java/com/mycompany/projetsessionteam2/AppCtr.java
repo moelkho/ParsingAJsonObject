@@ -62,7 +62,7 @@ public class AppCtr {
                 
 //            //Tester la creation du fichier de sortie
 //            file.delete();
-//            Utilitaire.verifierCreationFichierSortie(file);
+//            GestionErreur.verifierCreationFichierSortie(file);
                 
             }catch(IOException e2){
                 System.out.println("Le fichier de sortie '"+args[1]+"' n'a pas été crée");
