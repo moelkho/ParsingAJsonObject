@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.ir.BreakNode;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
@@ -37,10 +38,9 @@ public class Utilitaire {
     
     
 
-    public static String loadJsonIntoString(String filePath) 
-            throws FileNotFoundException, IOException {
+    public static String loadJsonIntoString(String filePath) throws FileNotFoundException, IOException 
+        {
       
-
         FileInputStream myInputStream = new FileInputStream(filePath);
         return IOUtils.toString(myInputStream, "UTF-8");
     }
@@ -243,4 +243,17 @@ public class Utilitaire {
    return str ;
    
 }
+   
+   public static void VerifierExistanceFichier(String filePath){
+    
+    File f = new File(filePath);
+
+    if(!f.exists()){
+        System.out.println("Le fichier d'entrées n'est pas disponible! ");
+        System.exit(0);
+    }
+   }
+       
+   
+
 }
