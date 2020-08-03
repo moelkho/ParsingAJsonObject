@@ -7,12 +7,13 @@ import net.sf.json.JSONObject;
 
 public class AppCtr {
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
       
+            
+            Utilitaire.VerifierExistanceFichier("json/"+args[0]);
         
-        String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
-        
-           
+            String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
+            
            
             JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
             
@@ -57,6 +58,7 @@ public class AppCtr {
             JSONObject sortie;
             sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
             System.out.println(sortie);
+            
             Utilitaire.saveJsonIntoFile(sortie.toString(), "json/"+args[1]);
         
     }  
