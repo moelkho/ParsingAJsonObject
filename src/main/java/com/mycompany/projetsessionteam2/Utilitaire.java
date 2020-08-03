@@ -60,12 +60,15 @@ public class Utilitaire {
     
     public static double obtenirPrixMin(JSONObject terrain){
          String prixMinStr = terrain.getString("prix_m2_min").substring(0, 4);
-         return Double.parseDouble(prixMinStr);
+         double valeurPrixMin = Exigences.formaterMontant(prixMinStr);
+         return valeurPrixMin;
     }
     
     public static double obtenirPrixMax(JSONObject terrain){
         String prixMaxStr = terrain.getString("prix_m2_max").substring(0, 4);
-         return Double.parseDouble(prixMaxStr);
+        double ValeurPrixMax = Exigences.formaterMontant(prixMaxStr);
+        
+         return ValeurPrixMax;
     }
               
     //recuperer le lotissement

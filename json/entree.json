@@ -1,7 +1,7 @@
 {
 	"type_Te rrain": 0,
-	"prix_m2_min": "3.45 $",
-	"prix_m2_max": "7.00 $",
+	"prix_m2_min": "3,45 $",
+	"prix_m2_max": "7,00 $",
 	"lotissemenTS": [{
 		"description": "lot 1",
 		"nombrE_droits_passage": 4,

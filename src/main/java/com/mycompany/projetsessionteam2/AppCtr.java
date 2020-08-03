@@ -24,7 +24,9 @@ public class AppCtr {
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
+            System.out.println(prixMin);
             double prixMax = Utilitaire.obtenirPrixMax(terrain);
+            System.out.println(prixMax);
             
             JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
             
