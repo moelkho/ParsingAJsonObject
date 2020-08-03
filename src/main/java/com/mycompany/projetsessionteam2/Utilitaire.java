@@ -220,11 +220,12 @@ public class Utilitaire {
         return montantServices;
     }
 
-   public static void saveJsonIntoFile(String content, String filePath) 
+   public static File saveJsonIntoFile(String content, String filePath) 
             throws IOException {
 
         File file = new File(filePath);
         FileUtils.writeStringToFile(file, content, "UTF-8");
+        return file;
     }
    
    
@@ -246,12 +247,10 @@ public class Utilitaire {
 }
    
    
-   public static void VerifierExistanceFichier(String filePath){
+   public static void verifierCreationFichierSortie(File file){
     
-    File f = new File(filePath);
-
-    if(!f.exists()){
-        System.out.println("Le fichier d'entrées n'est pas disponible! ");
+    if(!file.exists()){
+        System.out.println("Le fichier de sortie n'a pas été crée! ");
         System.exit(0);
     }
    }

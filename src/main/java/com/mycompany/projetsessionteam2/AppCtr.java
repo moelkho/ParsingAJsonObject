@@ -1,5 +1,6 @@
 package com.mycompany.projetsessionteam2;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import net.sf.json.JSONArray;
@@ -7,28 +8,25 @@ import net.sf.json.JSONObject;
 
 public class AppCtr {
 
-    public static void main(String[] args) throws ParseException, IOException {
+    public static void main(String[] args) throws ParseException {
       
             
-//            Utilitaire.VerifierExistanceFichier("json/"+args[0]);
-        
-            String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
-            
+        String json = null;
+        try{
+            json = Utilitaire.loadJsonIntoString("json/"+args[0]);
+        }catch(IOException e1){
+            System.out.println("Le fichier d'entrée spécifié '"+args[0]+"' est introuvable");
+             System.exit(0);
+        }
            
             JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
             
-            System.out.println(jsonObjectNonFormated);
-            
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
-            
-            System.out.println(terrain);
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
-            System.out.println(prixMin);
             double prixMax = Utilitaire.obtenirPrixMax(terrain);
-            System.out.println(prixMax);
-            
+           
             JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
             
             double valFonciereParLot, valFociereTerrainInitial=0, valeurParLot, montantDroitsPassage, montantServices;
@@ -57,9 +55,18 @@ public class AppCtr {
               
             JSONObject sortie;
             sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
-            System.out.println(sortie);
+            //System.out.println(sortie);
             
-            Utilitaire.saveJsonIntoFile(sortie.toString(), "json/"+args[1]);
-        
+            try{
+                File file = Utilitaire.saveJsonIntoFile(sortie.toString(), "json/"+args[1]);
+                
+//            //Tester la creation du fichier de sortie
+//            file.delete();
+//            Utilitaire.verifierCreationFichierSortie(file);
+                
+            }catch(IOException e2){
+                System.out.println("Le fichier de sortie '"+args[1]+"' n'a pas été crée");
+            System.exit(0);
+            }
     }  
 }
