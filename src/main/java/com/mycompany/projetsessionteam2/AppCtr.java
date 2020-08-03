@@ -10,7 +10,7 @@ public class AppCtr {
     public static void main(String[] args) throws ParseException, IOException {
       
             
-            Utilitaire.VerifierExistanceFichier("json/"+args[0]);
+//            Utilitaire.VerifierExistanceFichier("json/"+args[0]);
         
             String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
             

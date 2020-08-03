@@ -134,6 +134,7 @@ public class Utilitaire {
             double valFociereFinalTerrain, double taxeScolaire, double taxeMunicipale) throws ParseException{
         JSONObject sortie = new JSONObject();
         sortie.accumulate("valeur_fonciere_totale", roundTo5(valFociereFinalTerrain , 0.05) + " $");
+        
         sortie.accumulate("taxe_scolaire", roundTo5(taxeScolaire , 0.05) + " $");
         sortie.accumulate("taxe_municipale", roundTo5(taxeMunicipale , 0.05) + " $");
         sortie.accumulate("lotissements", lotissementSortie);
@@ -240,9 +241,10 @@ public class Utilitaire {
         }
    String str=d.format(d1);
        
-   return str ;
+   return str.replaceAll(",", ".") ;
    
 }
+   
    
    public static void VerifierExistanceFichier(String filePath){
     
