@@ -50,10 +50,20 @@ public class Exigences {
                 JSONArray arr2 = new JSONArray();
                 arr = jsonObject1.getJSONArray(jsonKey);
 
-                for (int i = 0; i < arr.size(); i++) {
+               arr2 = bouclerSurJsonArray(arr,arr2);
+               
+                jsonKey = jsonKey.toLowerCase().replaceAll(" ", "");
+
+               return jsonObject2.accumulate(jsonKey, arr2);
+    
+    }
+    
+    public static JSONArray bouclerSurJsonArray(JSONArray arr1, JSONArray arr2)
+    {
+         for (int i = 0; i < arr1.size(); i++) {
                     JSONObject jsonObject3 = new JSONObject();
                     JSONObject jsonObject4 = new JSONObject();
-                    jsonObject3 = arr.getJSONObject(i);
+                    jsonObject3 = arr1.getJSONObject(i);
                     Iterator it2 = jsonObject3.keys();
                     while (it2.hasNext()) {
                         String jsonKey2 = (String) it2.next();
@@ -66,9 +76,7 @@ public class Exigences {
                     }
                     arr2.add(jsonObject4);
                 }
-                jsonKey = jsonKey.toLowerCase().replaceAll(" ", "");
-
-               return jsonObject2.accumulate(jsonKey, arr2);
     
+         return arr2;
     }
 }

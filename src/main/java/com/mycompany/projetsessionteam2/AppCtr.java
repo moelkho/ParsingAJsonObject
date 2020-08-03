@@ -16,9 +16,10 @@ public class AppCtr {
            
             JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
             
-            
+            System.out.println(jsonObjectNonFormated);
             
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
+            
             System.out.println(terrain);
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
