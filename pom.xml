@@ -121,6 +121,10 @@
             </goals>
           </execution>
         </executions>
+         <configuration>
+      <shadedArtifactAttached>true</shadedArtifactAttached>
+      <shadedClassifierName>launcher</shadedClassifierName> <!-- Can be any name that makes sense -->
+    </configuration>
       </plugin>
       
       <plugin>

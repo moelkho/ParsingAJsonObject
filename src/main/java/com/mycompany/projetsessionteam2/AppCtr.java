@@ -10,7 +10,7 @@ public class AppCtr {
     public static void main(String[] args) throws IOException, ParseException {
       
         
-        String json = Utilitaire.loadJsonIntoString("files/entree.json");
+        String json = Utilitaire.loadJsonIntoString("json/"+args[0]);
            
             JSONObject terrain = Utilitaire.creerJsonObject(json);
             
@@ -47,7 +47,7 @@ public class AppCtr {
             JSONObject sortie;
             sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
             System.out.println(sortie);
-            Utilitaire.saveJsonIntoFile(sortie.toString(), "sortie/sortie3.json");
+            Utilitaire.saveJsonIntoFile(sortie.toString(), "json/"+args[1]);
         
     }  
 }

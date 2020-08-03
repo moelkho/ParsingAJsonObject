@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
@@ -91,11 +94,11 @@ public class Utilitaire {
     }
     
     //Creer lot de sortie
-    public static JSONObject creerLotSortie(JSONObject lot , double valFonciereParLot){
+    public static JSONObject creerLotSortie(JSONObject lot , double valFonciereParLot) throws ParseException{
         JSONObject lotSortie = new JSONObject();
         String description = lot.getString("description");
         lotSortie.accumulate("description", description);
-        lotSortie.accumulate("valeur_par_lot", valFonciereParLot + " $");
+        lotSortie.accumulate("valeur_par_lot", roundTo5(valFonciereParLot , 0.05) + " $");
         return lotSortie;
     }
     
@@ -109,7 +112,8 @@ public class Utilitaire {
    
     
     public static double calculerValFonciereFinal(double valFociereTerrainInitial){
-        return valFociereTerrainInitial + VALEURDEBASE;
+        
+        return valFociereTerrainInitial + VALEURDEBASE ;
     }
     
     public static double calculerTaxeScolaire(double valFociereFinalTerrain){
@@ -124,11 +128,11 @@ public class Utilitaire {
     
     //Creer le jsonObject de sortie
     public static JSONObject creerJsonObjectDeSortie(JSONArray lotissementSortie, 
-            double valFociereFinalTerrain, double taxeScolaire, double taxeMunicipale){
+            double valFociereFinalTerrain, double taxeScolaire, double taxeMunicipale) throws ParseException{
         JSONObject sortie = new JSONObject();
-        sortie.accumulate("valeur_fonciere_totale", valFociereFinalTerrain + " $");
-        sortie.accumulate("taxe_scolaire", taxeScolaire + " $");
-        sortie.accumulate("taxe_municipale", taxeMunicipale + " $");
+        sortie.accumulate("valeur_fonciere_totale", roundTo5(valFociereFinalTerrain , 0.05) + " $");
+        sortie.accumulate("taxe_scolaire", roundTo5(taxeScolaire , 0.05) + " $");
+        sortie.accumulate("taxe_municipale", roundTo5(taxeMunicipale , 0.05) + " $");
         sortie.accumulate("lotissements", lotissementSortie);
         
         return sortie;
@@ -219,9 +223,21 @@ public class Utilitaire {
         FileUtils.writeStringToFile(file, content, "UTF-8");
     }
    
-   public static void formaterDecimale(double nombre){
-       NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
-       
    
-   }
+   public static String roundTo5(double i, double v) throws ParseException{
+   
+   DecimalFormat d = new DecimalFormat("#.00") ;
+   String r = d.format(Math.ceil(i/v) * v);
+   NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
+   double d1 = 0;
+       try {
+            d1 = nf.parse(r).doubleValue();
+        } catch (ParseException ex) {
+            Logger.getLogger(Utilitaire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   String str=d.format(d1);
+       
+   return str ;
+   
+}
 }
