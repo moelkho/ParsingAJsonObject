@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
@@ -16,134 +18,165 @@ public class Utilitaire {
     public static final double TAUXTAXEMUNICIPALE = 0.025;
     public static final double VALEURDEBASE = 733.77;
     public static final int NBRESERVICEDEBASE = 2;
+    public static final double MONTANTDEBASE = 500;
+    public static final double TAUXPASSAGEAGRICOLE = .05;
+    public static final double TAUXPASSAGECOMMERCIAL = .15;
+    public static final double TAUXPASSAGERESIDENTIEL = .1;
+    public static final double SUPERFICIEMIN = 500;
+    public static final double SUPERFICIEMAX = 10000;
+    public static final double MONTANTSERVICE1 = 500;
+    public static final double MONTANTSERVICE2 = 1000;
+    public static final double MONTANTSERVICE3 = 1500;
+    public static final double MONTANTPLAFON = 5000;
+    public static final int TERRAINAGRICOLE = 0;
+    public static final int TERRAINRESIDENTIEL = 1;
+    public static final int TERRAINCOMMERCIAL = 2;
+    
+    
 
     public static String loadJsonIntoString(String filePath) 
             throws FileNotFoundException, IOException {
+      
 
         FileInputStream myInputStream = new FileInputStream(filePath);
         return IOUtils.toString(myInputStream, "UTF-8");
-
     }
-
-    public static void saveJsonIntoFile(String content, String filePath) 
-            throws IOException {
-
-        File file = new File(filePath);
-        FileUtils.writeStringToFile(file, content, "UTF-8");
+    
+    
+    public static JSONObject creerJsonObject(String json){
+        
+        JSONObject terrain  = JSONObject.fromObject(json);
+        return terrain;
     }
 
     
-    public static JSONObject retournerSortie(JSONObject terrain) {
-      
-        //Recuperer le type de terrain ainsi que le prixMin et prixMax
-        int type_terrain = terrain.getInt("type_terrain");
+    public static int obtenirTypeTerrain(JSONObject terrain){
+         int type_terrain = terrain.getInt("type_terrain");
+         return type_terrain;
+    }
+    
+    public static double obtenirPrixMin(JSONObject terrain){
+         String prixMinStr = terrain.getString("prix_m2_min").substring(0, 4);
+         return Double.parseDouble(prixMinStr);
+    }
+    
+    public static double obtenirPrixMax(JSONObject terrain){
         String prixMaxStr = terrain.getString("prix_m2_max").substring(0, 4);
-        String prixMinStr = terrain.getString("prix_m2_min").substring(0, 4);
-        double prixMax = Double.parseDouble(prixMaxStr);
-        double prixMin = Double.parseDouble(prixMinStr);
+         return Double.parseDouble(prixMaxStr);
+    }
+              
+    //recuperer le lotissement
+    public static JSONArray recupererLotissement(JSONObject terrain){
+       return terrain.getJSONArray("lotissements");
+    }
+    
+    //recuperer le lot
+    public static JSONObject obtenirLot(JSONArray lotissement , int i){
+        return lotissement.getJSONObject(i);
+    }
+    
+    //Calculer la sortie pour un lot
+    public static double calculerValeurFonciereParLot(double valeurParLot , 
+                double montantDroitsPassage, double montantServices){
         
-        //Declarer les diffrentes valeurs a calculer pour chaque lot et pour le terrain
-        double valeurParLot, montantServices, montantDroitsPassage;
-        double valFonciereParLot, valFociereTerrainInitial = 0;
-        double valFociereFinalTerrain, taxeScolaire, taxeMunicipale;
-
-        String description;
+        double valFonciereParLot =  valeurParLot + montantDroitsPassage + montantServices;
+        return valFonciereParLot;
+    }
+    
+    //Cumuler la valeur financiere par lot
+    public static double cumulerValFinanciereParLot(double valFonciereParLot , double valFociereTerrainInitial){
         
-        JSONArray lotissements = terrain.getJSONArray("lotissements");
-        JSONObject lot;
-        JSONObject sortie = new JSONObject();
-        
-        JSONArray lotissementSortie = new JSONArray();
+        valFociereTerrainInitial = valFociereTerrainInitial + valFonciereParLot;
+        return valFociereTerrainInitial;
+    }
+    
+    //Creer lot de sortie
+    public static JSONObject creerLotSortie(JSONObject lot , double valFonciereParLot){
         JSONObject lotSortie = new JSONObject();
+        String description = lot.getString("description");
+        lotSortie.accumulate("description", description);
+        lotSortie.accumulate("valeur_par_lot", valFonciereParLot + " $");
+        return lotSortie;
+    }
+    
+    
+    //Ajouter le lotSortie au lotissement de sortie
+    public static void ajouterLotSortieAuLotissementSortie(JSONObject lotSortie , JSONArray lotissementSortie){
+        lotissementSortie.add(lotSortie);
+        lotSortie.clear();
         
-        DecimalFormat df = new DecimalFormat("#.##");
-
-        //Parcourir le jsonArray lotissement et calculer les valeurs pour chaque lot
-        for (int i = 0; i < lotissements.size(); i++) {
-
-            lot = lotissements.getJSONObject(i);
-
-            description = lot.getString("description");
-
-            valeurParLot = calculerMontantValeurParLot(type_terrain, prixMin, prixMax, lot);
-            montantDroitsPassage = calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
-            montantServices = calculerMontantServices(type_terrain, lot);
-            
-            valFonciereParLot = valeurParLot + montantDroitsPassage + montantServices;
-            valFociereTerrainInitial += valFonciereParLot;
-            
-            //Contruire le jsonObject lot et le pousser dans le jsonArray lotissement
-            lotSortie.accumulate("description", description);
-            lotSortie.accumulate("valeur_par_lot", df.format(valFonciereParLot) + " $");
-            lotissementSortie.add(lotSortie);
-            lotSortie.clear();
-        }
-        valFociereFinalTerrain = valFociereTerrainInitial + VALEURDEBASE;
-        taxeScolaire = valFociereFinalTerrain * TAUXTAXESCOLAIRE;
-        taxeMunicipale = valFociereFinalTerrain * TAUXTAXEMUNICIPALE;
-        //contruire l'objet json sortie
-        sortie.accumulate("valeur_fonciere_totale", df.format(valFociereFinalTerrain) + " $");
-        sortie.accumulate("taxe_scolaire", df.format(taxeScolaire) + " $");
-        sortie.accumulate("taxe_ municipale", df.format(taxeMunicipale) + " $");
+    }
+   
+    
+    public static double calculerValFonciereFinal(double valFociereTerrainInitial){
+        return valFociereTerrainInitial + VALEURDEBASE;
+    }
+    
+    public static double calculerTaxeScolaire(double valFociereFinalTerrain){
+        return valFociereFinalTerrain * TAUXTAXESCOLAIRE;
+    }
+    
+    public static double calculerTaxeMunicipale(double valFociereFinalTerrain){
+        return valFociereFinalTerrain * TAUXTAXEMUNICIPALE;
+    }
+    
+    
+    
+    //Creer le jsonObject de sortie
+    public static JSONObject creerJsonObjectDeSortie(JSONArray lotissementSortie, 
+            double valFociereFinalTerrain, double taxeScolaire, double taxeMunicipale){
+        JSONObject sortie = new JSONObject();
+        sortie.accumulate("valeur_fonciere_totale", valFociereFinalTerrain + " $");
+        sortie.accumulate("taxe_scolaire", taxeScolaire + " $");
+        sortie.accumulate("taxe_municipale", taxeMunicipale + " $");
         sortie.accumulate("lotissements", lotissementSortie);
-
+        
         return sortie;
     }
-
+    
     //Methode qui calcule le montant pour la valeur du lot 
-    public static double calculerMontantValeurParLot(int type_terrain,
-            double prixMin, double prixMax, JSONObject lot) {
-
-        double valeurParLot = 0, superficie;
-        
-        superficie = lot.getDouble("superficie");
-                
+    public static double calculerMontantValeurParLot(int type_terrain , JSONObject lot, double prixMin, double prixMax) {
+        double prix = 0;
+             
         switch (type_terrain) {
-        //traitement terrain agricole
             case 0:
-                valeurParLot = superficie * prixMin;
+                prix = prixMin;
                 break;
-        //traitement terrain residentiel
             case 1:
-                valeurParLot = superficie * (prixMin + prixMax) / 2;
+                prix = (prixMin + prixMax) / 2;
                 break;
-        //traitement terrain commercial
             case 2:
-                valeurParLot = superficie * prixMax;
+                prix = prixMax;
                 break;
             default:
                 break;
         }
-
-        return valeurParLot;
+        return  lot.getDouble("superficie") * prix;
     }
 
     
     //Methode qui calcule le montant pour les droits de passage
     public static double calculerMontantDroitsPassage(int type_terrain, 
             double valeurParLot, JSONObject lot) {
-
-        double montantDroitsPassage = 0;
+        double tauxPassage = 0;
+       
         int nbreDroitPassage = lot.getInt("nombre_droits_passage");
         
         switch (type_terrain) {
-        //traitement terrain agricole
             case 0:
-                montantDroitsPassage = 500 - (nbreDroitPassage * .05 * valeurParLot);
+                tauxPassage = TAUXPASSAGEAGRICOLE;
                 break;
-        //traitement terrain residentiel
             case 1:
-                montantDroitsPassage = 500 - (nbreDroitPassage * .1 * valeurParLot);
+                tauxPassage = TAUXPASSAGERESIDENTIEL;
                 break;
-              //traitement terrain commercial  
             case 2:
-                montantDroitsPassage = 500 - (nbreDroitPassage * .15 * valeurParLot);
+                tauxPassage = TAUXPASSAGECOMMERCIAL;
                 break;
             default:
                 break;
         }
 
-        return montantDroitsPassage;
+        return MONTANTDEBASE - (nbreDroitPassage * tauxPassage * valeurParLot);
     }
     
     
@@ -155,28 +188,40 @@ public class Utilitaire {
         superficie = lot.getDouble("superficie");
 
         //traitement terrain residentiel
-        if (type_terrain == 1) {
+        if (type_terrain == TAUXPASSAGERESIDENTIEL) {
             
-            if (superficie > 10000) 
-                montantServices = 1000 * nbreDeService;
-            else if (superficie > 500) 
-                montantServices = 500 * nbreDeService;
+            if (superficie > SUPERFICIEMAX) 
+                montantServices = MONTANTSERVICE2 * nbreDeService;
+            else if (superficie > SUPERFICIEMIN) 
+                montantServices = MONTANTSERVICE1 * nbreDeService;
         } 
         
         //traitement terrain commercial
-        else if (type_terrain == 2) {
-            if (superficie <= 500) 
-                montantServices = 500 * nbreDeService;
+        else if (type_terrain == TAUXPASSAGECOMMERCIAL) {
+            if (superficie <= SUPERFICIEMIN) 
+                montantServices = MONTANTSERVICE1 * nbreDeService;
             else 
-                montantServices = 1500 * nbreDeService;
+                montantServices = MONTANTSERVICE3 * nbreDeService;
             
             //Plafonner le montant pour les services a 5000$
-            if (montantServices > 5000) 
-                montantServices = 5000;
+            if (montantServices > MONTANTPLAFON) 
+                montantServices = MONTANTPLAFON;
             
         }
 
         return montantServices;
     }
 
+   public static void saveJsonIntoFile(String content, String filePath) 
+            throws IOException {
+
+        File file = new File(filePath);
+        FileUtils.writeStringToFile(file, content, "UTF-8");
+    }
+   
+   public static void formaterDecimale(double nombre){
+       NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
+       
+   
+   }
 }
