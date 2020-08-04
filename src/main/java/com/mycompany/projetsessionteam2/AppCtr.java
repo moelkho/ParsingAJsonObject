@@ -29,6 +29,7 @@ public class AppCtr {
             GestionErreur.verifierNombreservices(terrain);
             GestionErreur.verifierNbreLot(terrain);
             GestionErreur.PrixNegatif(terrain);
+            GestionErreur.verifierSuperficieNegative(terrain);
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);

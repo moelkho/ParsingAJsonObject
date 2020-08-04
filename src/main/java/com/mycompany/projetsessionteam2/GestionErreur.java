@@ -103,4 +103,28 @@ public class GestionErreur {
          }
          
     }
+     
+     
+     public static void verifierSuperficieNegative(JSONObject terrain){
+     
+         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+         JSONObject lot;
+         int superficie;
+         String description;
+         for(int i = 0 ; i < lotissements.size() ; i++){
+             lot = Utilitaire.obtenirLot(lotissements, i);
+             superficie = lot.getInt("superficie");
+             description = lot.getString("description");
+             
+             if( superficie < 0){
+                 System.out.println("Erreur: La superficie du "+description+" est négative");
+                 System.exit(0);
+             }
+             else if (superficie > 50000){
+                 System.out.println("Erreur: La superficie du "+description+" est supérieure à 50000 m2.");
+                 System.exit(0);
+                 
+             }
+         }
+     }
 }
