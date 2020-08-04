@@ -51,6 +51,8 @@ public class AppCtr {
 
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
         
+        
+        
         double valFonciereParLot, valFociereTerrainInitial = 0, valeurParLot, montantDroitsPassage, montantServices;
         JSONArray lotissementSortie = new JSONArray();
 
@@ -63,9 +65,10 @@ public class AppCtr {
             
 
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
+            
 
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
-            ;
+          
             
 
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
@@ -79,13 +82,16 @@ public class AppCtr {
         }
 
         double valFociereFinalTerrain = Utilitaire.calculerValFonciereFinal(valFociereTerrainInitial);
+        System.out.println(valFociereFinalTerrain);
         double taxeScolaire = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
+        System.out.println(taxeScolaire);
         double taxeMunicipale = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
+        System.out.println(taxeMunicipale);
 
         JSONObject sortie;
         sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
-//        System.out.println(sortie);
-
+        
+        System.out.println(sortie);
         try {
             File file = Utilitaire.saveJsonIntoFile(sortie.toString(), "json/" + args[1]);
             System.out.println(file);
