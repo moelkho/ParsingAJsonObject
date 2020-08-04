@@ -9,7 +9,7 @@
 		"super ficie": 465,
 		"date_mesure": "2015-10-14"
 	}, {
-		"description": " lot 2",
+		"description": "lot 2",
 		"nombre_droits_passage": 0,
 		"nombre_Services": 1,
 		"super ficie": 1082,
@@ -20,6 +20,24 @@
 		"nombre_se rvices": 3,
 		"superficie": 3333,
 		"date_Me sure": "2013-06-20"
+	}, {
+		"description": "lot 4",
+		"nombre_droits_passage": 0,
+		"nombre_Services": 1,
+		"super ficie": 1082,
+		"date_mesure": "2015-12-15"
+	}, {
+		"description": "lot 5",
+		"nombre_droits_passage": 0,
+		"nombre_Services": 1,
+		"super ficie": 1082,
+		"date_mesure": "2015-12-15"
+	}, {
+		"description": "lot 6",
+		"nombre_droits_passage": 0,
+		"nombre_Services": 1,
+		"super ficie": 1082,
+		"date_mesure": "2015-12-15"
 	}
     ]
 }
