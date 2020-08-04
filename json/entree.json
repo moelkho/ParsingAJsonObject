@@ -4,7 +4,7 @@
 	"prix_m2_max": "7,00 $",
 	"lotissemenTS": [{
 		"description": "lot 1",
-		"nombrE_droits_passage": 4,
+		"nombrE_droits_passage": ,
 		"nombre_services": 1,
 		"super ficie": 465,
 		"date_mesure": "2015-10-14"
