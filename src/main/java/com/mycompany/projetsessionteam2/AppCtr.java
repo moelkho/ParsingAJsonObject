@@ -68,7 +68,7 @@ public class AppCtr {
 
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
             
-            System.out.println(valFonciereParLot);
+            
 
             valFociereTerrainInitial = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
 
