@@ -61,8 +61,40 @@ public class GestionErreur {
                  System.exit(0);
              }
          }
-    
      }
+     
+     public static void nbreTerrain(JSONObject terrain){
+     
+         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+         JSONObject lot;
+         int prix_m2_min;
+         String description;
+         for(int i = 0 ; i < lotissements.size() ; i++){
+//             lot = Utilitaire.obtenirLot(lotissements, i);
+//             prix_m2_min = lot.getInt("prix_m2_min");
+//             description = lot.getString("description");
+//             if( prix_m2_min > 5){
+//                 System.out.println("message : Le nombre de services du "+description+" est supérieur à 5.");
+//                 System.exit(0);
+//             }
+//             else if (prix_m2_min < 0){
+//                 System.out.println("message : Le nombre de services du "+description+" est inférieur à 0.");
+//                 System.exit(0);
+//             }
+
+//             System.out.println(lotissements.size());
+         }
+         
+         if(lotissements.size()<=0)
+         {
+             System.out.println("un terrain doit avoir au moins un lot.");
+                 System.exit(0);         
+         }
+             
+     }
+     
+     
+ 
      
      
 }
