@@ -42,5 +42,27 @@ public class GestionErreur {
     
      }
      
+     public static void verifierNombreservices(JSONObject terrain){
+     
+         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+         JSONObject lot;
+         int nbreService;
+         String description;
+         for(int i = 0 ; i < lotissements.size() ; i++){
+             lot = Utilitaire.obtenirLot(lotissements, i);
+             nbreService = lot.getInt("nombre_services");
+             description = lot.getString("description");
+             if( nbreService > 5){
+                 System.out.println("message : Le nombre de services du "+description+" est supérieur à 5.");
+                 System.exit(0);
+             }
+             else if (nbreService < 0){
+                 System.out.println("message : Le nombre de services du "+description+" est inférieur à 0.");
+                 System.exit(0);
+             }
+         }
+    
+     }
+     
      
 }
