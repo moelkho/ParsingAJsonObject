@@ -203,44 +203,44 @@ public class GestionErreur {
             message = "La propriété 'lotissements' est manquante dans le fichier d'entrée !";
         }
         
-        JSONObject erreur = new JSONObject();
-        if(isMissingKey == true){
-            erreur.accumulate("message", message);
-            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
-            System.exit(0);
-        }
-        
         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
         JSONObject lot;
         int i = 0;
-        while(isMissingKey == false && i < lotissements.size()){
+        if(isMissingKey == false){
+            while(isMissingKey == false && i < lotissements.size()){
         
-            lot = Utilitaire.obtenirLot(lotissements, i);
-            
-            if(!(lot.has("description"))){
-                isMissingKey = true;
-                message = "La propriété 'description' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
-            }
-            if(!(lot.has("nombre_droits_passage"))){
-                isMissingKey = true;
-                message = "La propriété 'nombre_droits_passage' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
-            }
-            if(!(lot.has("nombre_services"))){
-                isMissingKey = true;
-                message = "La propriété 'nombre_services' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
-            }
-            if(!(lot.has("superficie"))){
-                isMissingKey = true;
-                message = "La propriété 'superficie' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
-            }
-            if(!(lot.has("date_mesure"))){
-                isMissingKey = true;
-                message = "La propriété 'date_mesure' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
-            }
-            i++;
-            
+                lot = Utilitaire.obtenirLot(lotissements, i);
+
+                if(!(lot.has("description"))){
+                    isMissingKey = true;
+                    message = "La propriété 'description' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+                    break;
+                }
+                if(!(lot.has("nombre_droits_passage"))){
+                    isMissingKey = true;
+                    message = "La propriété 'nombre_droits_passage' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+                    break;
+                }
+                if(!(lot.has("nombre_services"))){
+                    isMissingKey = true;
+                    message = "La propriété 'nombre_services' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+                    break;
+                }
+                if(!(lot.has("superficie"))){
+                    isMissingKey = true;
+                    message = "La propriété 'superficie' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+                    break;
+                }
+                if(!(lot.has("date_mesure"))){
+                    isMissingKey = true;
+                    message = "La propriété 'date_mesure' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+                    break;
+                }
+                i++;
         }
-        erreur = new JSONObject();
+        }
+       
+        JSONObject erreur = new JSONObject();
         if(isMissingKey == true){
             erreur.accumulate("message", message);
             Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
