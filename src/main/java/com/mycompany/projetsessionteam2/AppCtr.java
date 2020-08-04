@@ -48,20 +48,27 @@ public class AppCtr {
         double prixMax = Utilitaire.obtenirPrixMax(terrain);
 
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
-
+        
         double valFonciereParLot, valFociereTerrainInitial = 0, valeurParLot, montantDroitsPassage, montantServices;
         JSONArray lotissementSortie = new JSONArray();
 
         for (int i = 0; i < lotissement.size(); i++) {
 
             JSONObject lot = Utilitaire.obtenirLot(lotissement, i);
+            
+            
             valeurParLot = Utilitaire.calculerMontantValeurParLot(typeTerrain, lot, prixMin, prixMax);
+            
 
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
 
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
+            ;
+            
 
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
+            
+            System.out.println(valFonciereParLot);
 
             valFociereTerrainInitial = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
 
@@ -75,10 +82,11 @@ public class AppCtr {
 
         JSONObject sortie;
         sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
-        //System.out.println(sortie);
+//        System.out.println(sortie);
 
         try {
             File file = Utilitaire.saveJsonIntoFile(sortie.toString(), "json/" + args[1]);
+            System.out.println(file);
 
 //            //Tester la creation du fichier de sortie
 //            file.delete();
@@ -88,5 +96,10 @@ public class AppCtr {
             System.exit(0);
         }
         System.out.println("test jenkins");
+        
+        double i = -2.02;
+        String j =Utilitaire.roundTo5(i, 0.05);
+        System.out.println(j);
+        
     }
 }

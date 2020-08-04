@@ -89,10 +89,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of recupererLotissement method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of recupererLotissement method, of class Utilitaire.
+     */
 //    @Test
 //    public void testRecupererLotissement() {
 //        System.out.println("recupererLotissement");
@@ -120,31 +120,31 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerValeurFonciereParLot method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerValeurFonciereParLot() {
-//        System.out.println("calculerValeurFonciereParLot");
-//        double valeurParLot = 0.0;
-//        double montantDroitsPassage = 0.0;
-//        double montantServices = 0.0;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
-//        assertEquals(expResult, result, 0.0);
-//        
-//    }
+    @Test
+    public void testCalculerValeurFonciereParLot() {
+        System.out.println("calculerValeurFonciereParLot");
+        double valeurParLot = 2.5;
+        double montantDroitsPassage = 2.5;
+        double montantServices = 1.3;
+        double expResult = 6.3;
+        double result = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
+        assertEquals(expResult, result, 0.0);
+        
+    }
 //
 //    /**
 //     * Test of cumulerValFinanciereParLot method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCumulerValFinanciereParLot() {
-//        System.out.println("cumulerValFinanciereParLot");
-//        double valFonciereParLot = 0.0;
-//        double valFociereTerrainInitial = 0.0;
-//        double expResult = 0.0;
-//        double result = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
-//        assertEquals(expResult, result, 0.0);
-//        
-//    }
+    @Test
+    public void testCumulerValFinanciereParLot() {
+        System.out.println("cumulerValFinanciereParLot");
+        double valFonciereParLot = 3.0;
+        double valFociereTerrainInitial = 1.5;
+        double expResult = 4.5;
+        double result = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
+        assertEquals(expResult, result, 0.0);
+        
+    }
 //
 //    /**
 //     * Test of creerLotSortie method, of class Utilitaire.
@@ -230,18 +230,21 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerMontantValeurParLot method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerMontantValeurParLot() {
-//        System.out.println("calculerMontantValeurParLot");
-//        int type_terrain = 0;
-//        JSONObject lot = null;
-//        double prixMin = 0.0;
-//        double prixMax = 0.0;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, lot, prixMin, prixMax);
-//        assertEquals(expResult, result, 0.0);
-//      
-//    }
+    @Test
+    public void testCalculerMontantValeurParLot() throws IOException {
+        System.out.println("calculerMontantValeurParLot");
+        int type_terrain = 0;
+        
+        JSONObject lot = new JSONObject();
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json");
+        lot = Utilitaire.creerJsonObject(str);
+        double prixMin = 3.45;
+        double prixMax = 7.0;
+        double expResult = 1604.25;
+        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, lot, prixMin, prixMax);
+        assertEquals(expResult, result, 0.0);
+      
+    }
 //
 //    /**
 //     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
@@ -261,16 +264,18 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerMontantServices method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerMontantServices() {
-//        System.out.println("calculerMontantServices");
-//        int type_terrain = 0;
-//        JSONObject lot = null;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
-//        assertEquals(expResult, result, 0.0);
-//        
-//    }
+    @Test
+    public void testCalculerMontantServices() throws IOException {
+        System.out.println("calculerMontantServices");
+        int type_terrain = 0;
+        JSONObject lot = null;
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json");
+        lot = Utilitaire.creerJsonObject(str);
+        double expResult = 0.0;
+        double result = Utilitaire.calculerMontantServices(type_terrain, lot);
+        assertEquals(expResult, result, 0.0);
+        
+    }
 //
 //    /**
 //     * Test of saveJsonIntoFile method, of class Utilitaire.
@@ -289,15 +294,36 @@ public class UtilitaireTest {
 //    /**
 //     * Test of roundTo5 method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testRoundTo5() throws Exception {
-//        System.out.println("roundTo5");
-//        double i = 0.0;
-//        double v = 0.0;
-//        String expResult = "";
-//        String result = Utilitaire.roundTo5(i, v);
-//        assertEquals(expResult, result);
-//       
-//    }
+    @Test
+    public void testRoundTo5() throws Exception {
+        System.out.println("roundTo5");
+        double i = 1.02;
+        double v = 0.05;
+        String expResult = "1.05";
+        String result = Utilitaire.roundTo5(i, v);
+        assertEquals(expResult, result);
+       
+    }
     
+    @Test
+     public void testRoundTo5Vegatif() throws Exception {
+        System.out.println("roundTo5");
+        double i = -2.02;
+        double v = 0.05;
+        String expResult = "-2.00";
+        String result = Utilitaire.roundTo5(i, v);
+        assertEquals(expResult, result);
+       
+    }
+     
+     @Test
+      public void testRoundTo5ChiffreDejaArrondi() throws Exception {
+        System.out.println("roundTo5");
+        double i = 5.05;
+        double v = 0.05;
+        String expResult = "5.05";
+        String result = Utilitaire.roundTo5(i, v);
+        assertEquals(expResult, result);
+       
+    }
 }
