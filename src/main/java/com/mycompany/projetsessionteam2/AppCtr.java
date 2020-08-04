@@ -97,8 +97,7 @@ public class AppCtr {
             System.out.println("Le fichier de sortie '" + args[1] + "' n'a pas été crée");
             System.exit(0);
         }
-        System.out.println("test jenkins");
-        
+               
         double i = -2.02;
         String j =Utilitaire.roundTo5(i, 0.05);
         System.out.println(j);
