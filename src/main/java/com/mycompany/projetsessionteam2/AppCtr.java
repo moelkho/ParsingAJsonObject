@@ -25,9 +25,11 @@ public class AppCtr {
           
             
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
-                       
+               
+            
             
         try {
+            GestionErreur.verifierExistanceCleJson(terrain, "json/"+args[1]);
             GestionErreur.verifierNombreDroitsPassage(terrain , "json/"+args[1]);
         } catch (IOException ex) {
             Logger.getLogger(AppCtr.class.getName()).log(Level.SEVERE, null, ex);

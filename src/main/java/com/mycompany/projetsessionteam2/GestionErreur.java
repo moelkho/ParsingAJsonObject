@@ -60,7 +60,7 @@ public class GestionErreur {
          double nbreDroitsPassage;
          String description;
          int i = 0;
-         JSONObject erreur = new JSONObject();
+         
          while(estNonConforme == false && i < lotissements.size()){
             lot = Utilitaire.obtenirLot(lotissements, i);
             nbreDroitsPassage = lot.getDouble("nombre_droits_passage");
@@ -79,6 +79,7 @@ public class GestionErreur {
              }
              i++; 
          }
+         JSONObject erreur = new JSONObject();
          if(estNonConforme == true){
          erreur.accumulate("message", message);
          Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
@@ -111,6 +112,7 @@ public class GestionErreur {
              }
          }
      }
+     
      
      public static void verifierNbreLot(JSONObject terrain){
      
@@ -170,7 +172,7 @@ public class GestionErreur {
          }
      }
      
-     public static void verifierTypeTerrain(JSONObject terrain){
+     public static void verifierTypeTerrain(JSONObject terrain ){
           
         int typeTerrain = terrain.getInt("type_terrain");
          
@@ -178,5 +180,72 @@ public class GestionErreur {
                  System.out.println("message : le type de terrain doit prendre la valeur 0, 1 ou 2 !");
                  System.exit(0);}
            
+     }
+     
+     public static void verifierExistanceCleJson(JSONObject terrain , String filePath) throws IOException {
+     
+        boolean isMissingKey = false;
+        String message = null;
+        if(!(terrain.has("type_terrain"))){
+            isMissingKey = true;
+            message = "La propriété 'type_terrain' est manquante dans le fichier d'entrée !";
+        }
+        if(!(terrain.has("prix_m2_min"))){
+            isMissingKey = true;
+            message = "La propriété 'prix_m2_min' est manquante dans le fichier d'entrée !";
+        }
+        if(!(terrain.has("prix_m2_max"))){
+            isMissingKey = true;
+            message = "La propriété 'prix_m2_max' est manquante dans le fichier d'entrée !";
+        }
+        if(!(terrain.has("lotissements"))){
+            isMissingKey = true;
+            message = "La propriété 'lotissements' est manquante dans le fichier d'entrée !";
+        }
+        
+        JSONObject erreur = new JSONObject();
+        if(isMissingKey == true){
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+        }
+        
+        JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+        JSONObject lot;
+        int i = 0;
+        while(isMissingKey == false && i < lotissements.size()){
+        
+            lot = Utilitaire.obtenirLot(lotissements, i);
+            
+            if(!(lot.has("description"))){
+                isMissingKey = true;
+                message = "La propriété 'description' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+            }
+            if(!(lot.has("nombre_droits_passage"))){
+                isMissingKey = true;
+                message = "La propriété 'nombre_droits_passage' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+            }
+            if(!(lot.has("nombre_services"))){
+                isMissingKey = true;
+                message = "La propriété 'nombre_services' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+            }
+            if(!(lot.has("superficie"))){
+                isMissingKey = true;
+                message = "La propriété 'superficie' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+            }
+            if(!(lot.has("date_mesure"))){
+                isMissingKey = true;
+                message = "La propriété 'date_mesure' du lot "+(i+1)+" est manquante dans le fichier d'entrée !";
+            }
+            i++;
+            
+        }
+        erreur = new JSONObject();
+        if(isMissingKey == true){
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+        }
+       
      }
 }
