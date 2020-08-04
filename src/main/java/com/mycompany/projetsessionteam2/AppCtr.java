@@ -10,7 +10,7 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
       
-            System.out.println("test pour jenkins");
+            
         String json = null;
         try{
             json = Utilitaire.loadJsonIntoString("json/"+args[0]);
