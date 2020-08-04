@@ -144,8 +144,7 @@ public class GestionErreur {
                 System.out.println("Le prix min ne peut pas être négatif !");
                 System.exit(0);         
             }
-
-         
+ 
     }
      
      
@@ -249,5 +248,61 @@ public class GestionErreur {
        
      }
      
-    
+     public static void verifierSiDescriptionEstNull(JSONObject terrain , String filePath) throws IOException{
+     
+        JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
+        JSONObject lot;
+        boolean isNull = false;
+        String description, message = "";
+        int i = 0;
+        while(isNull == false && i < lotissement.size()){
+            lot = Utilitaire.obtenirLot(lotissement, i);
+            description = lot.getString("description");
+            if(description.equals("")){
+                isNull = true;
+                message = "la description du lot "+(i+1)+" est vide !";
+            }
+            i++;
+        }
+        JSONObject erreur = new JSONObject();
+        if (isNull){
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+        }
+     }
+     
+     public static void verifierSiDescriptionEstUnique(JSONObject terrain , String filePath) throws IOException{
+     
+        JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
+         System.out.println(lotissement.size());
+        JSONObject lot;
+        boolean isUnique = false;
+        String description1, description2, message = "";
+        int i = 0, j; 
+        while(isUnique == false && i < lotissement.size()){
+            lot = Utilitaire.obtenirLot(lotissement, i);
+            description1 = lot.getString("description");
+            System.out.println("sortie de la boucle");
+            j = i+1;
+            while(isUnique == false && j < lotissement.size()){
+                lot = Utilitaire.obtenirLot(lotissement, j);
+                description2 = lot.getString("description");
+                
+                if(description2.equals(description1)){
+                    isUnique = true;
+                    message = "La description '"+description2+"' du lot "+(j+1)+" doit etre unique !";
+                    break;
+                }
+                j++;
+            }
+            i++;
+        }
+        JSONObject erreur = new JSONObject();
+        if (isUnique){
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+        }
+     }
 }
