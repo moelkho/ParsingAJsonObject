@@ -12,7 +12,7 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
       
-            
+            System.out.println("test pour jenkins +++");
         String json = null;
         try{
             json = Utilitaire.loadJsonIntoString("json/"+args[0]);
@@ -91,5 +91,6 @@ public class AppCtr {
                 System.out.println("Le fichier de sortie '"+args[1]+"' n'a pas été crée");
             System.exit(0);
             }
+            System.out.println("test jenkins");
     }  
 }
