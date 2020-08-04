@@ -63,7 +63,7 @@ public class GestionErreur {
          }
      }
      
-     public static void nbreTerrain(JSONObject terrain){
+     public static void nbreLot(JSONObject terrain){
      
          JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
  
