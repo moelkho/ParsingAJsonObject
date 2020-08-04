@@ -1,51 +1,51 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package com.mycompany.projetsessionteam2;
-//
-//import java.io.FileNotFoundException;
-//
-//import java.io.IOException;
-//import net.sf.json.JSONArray;
-//import net.sf.json.JSONObject;
-//import org.json.simple.parser.ParseException;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//
-//
-//public class UtilitaireTest {
-//    
-//    public UtilitaireTest() {
-//    }
-//    
-//  
-//
-//   
-//    // test de la methode LoadJsonIntoString
-//    
-//    @Test
-//    public void testLoadJsonIntoString() throws Exception {
-//        System.out.println("loadJsonIntoString");
-//        String filePath = "jsonFiles/test1.json";
-//        String expResult = "{\"name\":\"admin\"}";
-//        String result = Utilitaire.loadJsonIntoString(filePath);
-//        assertEquals(expResult, result);
-//       
-//    }
-//
-//    // test de la methode SaveJsonIntoFile
-//    @Test
-//    public void testSaveJsonIntoFile() throws Exception {
-//        System.out.println("saveJsonIntoFile");
-//        String content = "{\"cle\" : \"valeur\"}";
-//        String filePath = "jsonFiles/test3.json";
-//        
-//        Utilitaire.saveJsonIntoFile(content, filePath);
-//       
-//      
-//    }
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projetsessionteam2;
+
+import java.io.FileNotFoundException;
+
+import java.io.IOException;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+
+public class UtilitaireTest {
+    
+    public UtilitaireTest() {
+    }
+    
+  
+
+   
+    // test de la methode LoadJsonIntoString
+    
+    @Test
+    public void testLoadJsonIntoString() throws Exception {
+        System.out.println("loadJsonIntoString");
+        String filePath = "jsonTest/test1.json";
+        String expResult = "{\"name\":\"admin\"}";
+        String result = Utilitaire.loadJsonIntoString(filePath);
+        assertEquals(expResult, result);
+       
+    }
+
+    // test de la methode SaveJsonIntoFile
+    @Test
+    public void testSaveJsonIntoFile() throws Exception {
+        System.out.println("saveJsonIntoFile");
+        String content = "{\"cle\" : \"valeur\"}";
+        String filePath = "jsonTest/test3.json";
+        
+        Utilitaire.saveJsonIntoFile(content, filePath);
+       
+      
+    }
 //
 //    /* test de la methode  RetournerSortie, on construit en dur un objet
 //    JSON a l'interieur, cette methode retourne un objet JSON*/ 
@@ -332,4 +332,4 @@
 //        assertEquals(expResult, result, 0.0);
 //     
 //    }
-//}
+}
