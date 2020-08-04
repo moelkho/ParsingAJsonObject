@@ -73,4 +73,21 @@ public class GestionErreur {
              System.exit(0);         
          }
      }
+     
+     
+     public static void  PrixNegatif(JSONObject terrain){
+         String prixMin = terrain.getString("prix_m2_min").substring(0, 4);
+         double valeurPrixMin = Exigences.formaterMontant(prixMin);
+         
+         String prixMax = terrain.getString("prix_m2_max").substring(0, 4);
+         double valeurPrixMax = Exigences.formaterMontant(prixMax);
+         
+         
+         if(valeurPrixMin < 0 || valeurPrixMax < 0)
+         {
+             System.out.println("Le montant d'argent ne peut pas être négatif.");
+             System.exit(0);         
+         }
+         
+    }
 }

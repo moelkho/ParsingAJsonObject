@@ -27,6 +27,7 @@ public class AppCtr {
             GestionErreur.verifierNombreDroitsPassage(terrain);
             GestionErreur.verifierNombreservices(terrain);
             GestionErreur.nbreLot(terrain);
+            GestionErreur.PrixNegatif(terrain);
             
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
