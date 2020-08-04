@@ -3,6 +3,8 @@ package com.mycompany.projetsessionteam2;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -20,23 +22,34 @@ public class AppCtr {
         }
            
             JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
-           System.out.println(jsonObjectNonFormated.toString());
+          
             
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
+                       
             
+        try {
+            GestionErreur.verifierNombreDroitsPassage(terrain , "json/"+args[1]);
+        } catch (IOException ex) {
+            Logger.getLogger(AppCtr.class.getName()).log(Level.SEVERE, null, ex);
+        }   
             
-            GestionErreur.verifierNombreDroitsPassage(terrain);
             GestionErreur.verifierNombreservices(terrain);
-            GestionErreur.verifierNbreLot(terrain);
-            GestionErreur.PrixNegatif(terrain);
-            GestionErreur.verifierSuperficieNegative(terrain);
             
+            GestionErreur.verifierTypeTerrain(terrain);
+            
+            GestionErreur.verifierNbreLot(terrain);
+            
+            GestionErreur.verifierPrixNegatif(terrain);
+           
+            GestionErreur.verifierSuperficieNegative(terrain);
+             
+                       
             int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
             double prixMin = Utilitaire.obtenirPrixMin(terrain);
             double prixMax = Utilitaire.obtenirPrixMax(terrain);
            
             JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
-            
+         
             double valFonciereParLot, valFociereTerrainInitial=0, valeurParLot, montantDroitsPassage, montantServices;
             JSONArray lotissementSortie = new JSONArray();
             
