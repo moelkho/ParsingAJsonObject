@@ -23,7 +23,7 @@ public class AppCtr {
            System.out.println(jsonObjectNonFormated.toString());
             
             JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
-            
+            System.out.println(terrain.toString());
             
             GestionErreur.verifierNombreDroitsPassage(terrain);
             GestionErreur.verifierNombreservices(terrain);
