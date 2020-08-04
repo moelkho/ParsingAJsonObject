@@ -76,5 +76,6 @@ public class AppCtr {
                 System.out.println("Le fichier de sortie '"+args[1]+"' n'a pas été crée");
             System.exit(0);
             }
+            System.out.println("test jenkins");
     }  
 }
