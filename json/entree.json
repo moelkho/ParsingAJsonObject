@@ -5,7 +5,7 @@
 	"lotissemenTS": [{
 		"description": "lot 1",
 		"nombrE_droits_passage": 4,
-		"nombre_services": 0,
+		"nombre_services": 1,
 		"super ficie": 465,
 		"date_mesure": "2015-10-14"
 	}, {
@@ -16,11 +16,12 @@
 		"date_mesure": "2015-12-15"
 	}, {
 		"description": "lot 3",
-		"nombre_droits_passage": 8.8,
+		"nombre_droits_passage": 8,
 		"nombre_se rvices": 3,
 		"superficie": 3333,
 		"date_Me sure": "2013-06-20"
-	}]
+	}
+    ]
 }
  
  
