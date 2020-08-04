@@ -43,6 +43,7 @@ public class AppCtr {
         GestionErreur.verifierSuperficieNegative(terrain);
 
         int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
+        System.out.println(typeTerrain);
         double prixMin = Utilitaire.obtenirPrixMin(terrain);
         double prixMax = Utilitaire.obtenirPrixMax(terrain);
 
