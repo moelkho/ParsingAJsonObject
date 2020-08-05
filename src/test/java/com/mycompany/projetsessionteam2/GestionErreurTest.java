@@ -50,17 +50,33 @@ public class GestionErreurTest {
 //    /**
 //     * Test of verifierNombreservices method, of class GestionErreur.
 //     */
+//    @Test
+//    public void testVerifierNombreservicesSup5() throws Exception{
+//        System.out.println("verifierNombreservices");
+//        JSONObject terrain = new JSONObject();
+//        
+//        
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbrServicesup5.json", "jsonTest/ErreurFichierEntree.json");
+//
+//        terrain = Utilitaire.creerJsonObject(str);
+//
+//        String filePath = "jsonTest/sortieNbrServicesSup5.json";
+//        
+//        GestionErreur.verifierNombreservices(terrain, filePath);
+//
+//    }
+    
     @Test
-    public void testVerifierNombreservices() throws Exception{
+    public void testVerifierNombreservicesNegatif() throws Exception{
         System.out.println("verifierNombreservices");
         JSONObject terrain = new JSONObject();
         
         
-        String str = Utilitaire.loadJsonIntoString("jsonTest/entree_1.json", "jsonTest/ErreurFichierEntree.json");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbrServicesNegatif.json", "jsonTest/ErreurFichierEntree.json");
 
         terrain = Utilitaire.creerJsonObject(str);
 
-        String filePath = "jsonTest/NbrService.json";
+        String filePath = "jsonTest/sortieNbrServiceNegatif.json";
         
         GestionErreur.verifierNombreservices(terrain, filePath);
 
