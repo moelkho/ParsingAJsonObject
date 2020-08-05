@@ -3,6 +3,11 @@ package com.mycompany.projetsessionteam2;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.midi.Soundbank;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -315,4 +320,48 @@ public class GestionErreur {
             System.exit(0);
         }
      }
-}
+     
+     public static void verifierFormatDates(JSONObject terrain , String filePath) throws IOException {
+     
+        JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
+        JSONObject lot;
+        boolean isNotIsoDate = false;
+        String dateStr, message = null;
+        int i = 0;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setLenient(false);
+        Date parsedDate = null;
+        while(isNotIsoDate == false && i < lotissement.size()){
+            
+                lot = Utilitaire.obtenirLot(lotissement, i);
+                dateStr = lot.getString("date_mesure");
+                System.out.println(dateStr);
+            try {
+                System.out.println("Start try");
+                parsedDate = formatter.parse(dateStr);
+                System.out.println("++validated DATE TIME ++"+formatter.format(parsedDate));
+                System.out.println("End try");
+                
+            } catch (ParseException ex) {
+                System.out.println("In catch - Parsage impossible");
+                 message = "le format de date du "+lot.getString("description")+" ne respecte pas la norme (ISO 8601) !";
+                 isNotIsoDate = true;
+            }
+             
+            i++;
+        }
+        if(isNotIsoDate){
+            JSONObject erreur = new JSONObject();
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+        }
+            
+      }
+    }
+                 
+
+     
+     
+     
+
