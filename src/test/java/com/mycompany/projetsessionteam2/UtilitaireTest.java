@@ -6,9 +6,13 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -28,6 +32,19 @@ public class UtilitaireTest {
     public void testLoadJsonIntoString() throws Exception {
         System.out.println("loadJsonIntoString");
         String filePath = "jsonTest/test1.json";
+        String fileSortie = "jsonTest/sortieTest.json";
+        String expResult = "{\"name\":\"admin\"}";
+        String result = Utilitaire.loadJsonIntoString(filePath,fileSortie);
+        assertEquals(expResult, result);
+       
+    }
+    
+    /* exception IOException */
+    
+      @Test(expected = IOException.class)
+    public void testLoadJsonIntoStringIOException() throws Exception {
+        System.out.println("loadJsonIntoString");
+        String filePath = "";
         String fileSortie = "jsonTest/sortieTest.json";
         String expResult = "{\"name\":\"admin\"}";
         String result = Utilitaire.loadJsonIntoString(filePath,fileSortie);
@@ -159,16 +176,17 @@ public class UtilitaireTest {
 //    /**
 //     * Test of creerLotSortie method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCreerLotSortie() throws Exception {
-//        System.out.println("creerLotSortie");
-//        JSONObject lot = null;
-//        double valFonciereParLot = 0.0;
-//        JSONObject expResult = null;
-//        JSONObject result = Utilitaire.creerLotSortie(lot, valFonciereParLot);
-//        assertEquals(expResult, result);
-//        
-//    }
+    @Test
+    public void testCreerLotSortie() throws Exception {
+        System.out.println("creerLotSortie");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testCreerLotSortie.json", "sortieTest.json");
+        JSONObject lot = Utilitaire.creerJsonObject(str);
+        double valFonciereParLot = 1957.775;
+        JSONObject expResult = JSONObject.fromObject("{\"description\":\"lot 1\",\"valeur_par_lot\":\"1957.80 $\"}");
+        JSONObject result = Utilitaire.creerLotSortie(lot, valFonciereParLot);
+        assertEquals(expResult, result);
+        
+    }
 //
 //    /**
 //     * Test of ajouterLotSortieAuLotissementSortie method, of class Utilitaire.
@@ -198,28 +216,28 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerTaxeScolaire method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerTaxeScolaire() {
-//        System.out.println("calculerTaxeScolaire");
-//        double valFociereFinalTerrain = 0.0;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
-//        assertEquals(expResult, result, 0.0);
-//        
-//    }
+    @Test
+    public void testCalculerTaxeScolaire() {
+        System.out.println("calculerTaxeScolaire");
+        double valFociereFinalTerrain = 2000.00;
+        double expResult = 24;
+        double result = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
+        assertEquals(expResult, result, 0.0);
+        
+    }
 //
 //    /**
 //     * Test of calculerTaxeMunicipale method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerTaxeMunicipale() {
-//        System.out.println("calculerTaxeMunicipale");
-//        double valFociereFinalTerrain = 0.0;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
-//        assertEquals(expResult, result, 0.0);
-//        
-//    }
+    @Test
+    public void testCalculerTaxeMunicipale() {
+        System.out.println("calculerTaxeMunicipale");
+        double valFociereFinalTerrain = 10400;
+        double expResult = 260;
+        double result = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
+        assertEquals(expResult, result, 0.0);
+        
+    }
 //
 //    /**
 //     * Test of creerJsonObjectDeSortie method, of class Utilitaire.
@@ -249,8 +267,8 @@ public class UtilitaireTest {
 //     * Test of calculerMontantValeurParLot method, of class Utilitaire.
 //     */
     @Test
-    public void testCalculerMontantValeurParLot() throws IOException {
-        System.out.println("calculerMontantValeurParLot");
+    public void testCalculerMontantValeurParLot0() throws IOException {
+        System.out.println("calculerMontantValeurParLot0");
         int type_terrain = 0;
         
         JSONObject lot = new JSONObject();
@@ -263,13 +281,44 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
       
     }
+    @Test
+    public void testCalculerMontantValeurParLot1() throws IOException {
+        System.out.println("calculerMontantValeurParLot1");
+        int type_terrain = 1;
+        
+        JSONObject lot = new JSONObject();
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json","jsonTest/sortieTest.json");
+        lot = Utilitaire.creerJsonObject(str);
+        double prixMin = 3.45;
+        double prixMax = 7.0;
+        double expResult = 2429.625;
+        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, lot, prixMin, prixMax);
+        assertEquals(expResult, result, 0.0);
+      
+    }
+    
+    @Test
+    public void testCalculerMontantValeurParLot2() throws IOException {
+        System.out.println("calculerMontantValeurParLot2");
+        int type_terrain = 2;
+        
+        JSONObject lot = new JSONObject();
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json","jsonTest/sortieTest.json");
+        lot = Utilitaire.creerJsonObject(str);
+        double prixMin = 3.45;
+        double prixMax = 7.0;
+        double expResult = 3255;
+        double result = Utilitaire.calculerMontantValeurParLot(type_terrain, lot, prixMin, prixMax);
+        assertEquals(expResult, result, 0.0);
+      
+    }
 //
 //    /**
 //     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
 //     */
     @Test
     public void testCalculerMontantDroitsPassage1() {
-        System.out.println("calculerMontantDroitsPassage");
+        System.out.println("calculerMontantDroitsPassage1");
         int type_terrain = 1;
         double valeurParLot = 1750.07;
         JSONObject lot = JSONObject.fromObject("{\"nombre_droits_passage\": 4}");
@@ -281,7 +330,7 @@ public class UtilitaireTest {
     
      @Test
     public void testCalculerMontantDroitsPassage2() {
-        System.out.println("calculerMontantDroitsPassage");
+        System.out.println("calculerMontantDroitsPassage2");
         int type_terrain = 2;
         double valeurParLot = 1750.07;
         JSONObject lot = JSONObject.fromObject("{\"nombre_droits_passage\": 3}");
@@ -294,7 +343,7 @@ public class UtilitaireTest {
     }
       @Test
     public void testCalculerMontantDroitsPassage0() {
-        System.out.println("calculerMontantDroitsPassage");
+        System.out.println("calculerMontantDroitsPassage0");
         int type_terrain = 0;
         double valeurParLot = 1750.07;
        JSONObject lot = JSONObject.fromObject("{\"nombre_droits_passage\": 2}");
@@ -311,7 +360,7 @@ public class UtilitaireTest {
 //     */
      @Test
     public void testCalculerMontantServices2AvecSuperficie500Etmoins() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServicesSuperficie500Etmoins");
         int type_terrain = 2;
         JSONObject lot = new JSONObject();
         lot.put("superficie",500);
@@ -329,7 +378,7 @@ public class UtilitaireTest {
      @Test
     public void testCalculerMontantServices2AvecSuperficie500EtPlusEtmoinsDe5000() 
     {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServicesSuperficie500EtPlusEtmoinsDe5000");
         int type_terrain = 2;
         JSONObject lot = new JSONObject();
         lot.put("superficie",600);
@@ -345,7 +394,7 @@ public class UtilitaireTest {
     2 et la superficie est superieure a 5000 */
       @Test
     public void testCalculerMontantServices2AvecSuperficiePlusDe5000() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServices2AvecSuperficiePlusDe5000");
         int type_terrain = 2;
         JSONObject lot = new JSONObject();
         lot.put("superficie",6000);
@@ -361,7 +410,7 @@ public class UtilitaireTest {
     1 et la superficie est superieure a 10000 */
     @Test
     public void testCalculerMontantServices1SuperieurA10000() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServices1SuperieurA10000");
         int type_terrain = 1;
         JSONObject lot = new JSONObject();
         lot.put("superficie",12000);
@@ -377,7 +426,7 @@ public class UtilitaireTest {
     1 et la superficie est entre 500 et 10000 */
       @Test
     public void testCalculerMontantServices1Entre500Et10000() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServices1Entre500Et10000");
         int type_terrain = 1;
         JSONObject lot = new JSONObject();
         lot.put("superficie",700);
@@ -394,7 +443,7 @@ public class UtilitaireTest {
     
      @Test
     public void testCalculerMontantServices1Moinsde500() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServices1Moinsde500");
         int type_terrain = 1;
         JSONObject lot = new JSONObject();
         lot.put("superficie",250);
@@ -409,7 +458,7 @@ public class UtilitaireTest {
     2 et la superficie est inferieure a 500 */
        @Test
     public void testCalculerMontantServices0() {
-        System.out.println("calculerMontantServices");
+        System.out.println("calculerMontantServices0");
         int type_terrain = 0;
         JSONObject lot = new JSONObject();
         lot.put("superficie",6000);
@@ -424,18 +473,21 @@ public class UtilitaireTest {
 //    /**
 //     * Test of saveJsonIntoFile method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testSaveJsonIntoFile() throws Exception {
-//        System.out.println("saveJsonIntoFile");
-//        String content = "";
-//        String filePath = "C:/Users/admin/AppData/Local/Temp/"
-//                + "testSaveFile.json7526381794529581659test";
-//        File expResult = File.createTempFile("/jsonTest/testSaveFile.json", "");
-//       
-//        File result = Utilitaire.saveJsonIntoFile(content, filePath);
-//        assertEquals(expResult, result);
-//       
-//    }
+    @Test
+    public void testSaveJsonIntoFile() throws Exception {
+        System.out.println("saveJsonIntoFile");
+        String content = "{\"test\":\"sauvegarde json into file \"}";
+        String filePath = "/jsonTest/testSauvegardeJsonIntoFile.json" ;
+        File expResult = new File("/jsonTest/testSauvegardeJsonIntoFile.json");
+        FileWriter fw = new FileWriter(expResult);
+        fw.write("{\"test\":\"sauvegarde json into file \"}");
+        
+        
+       
+        File result = Utilitaire.saveJsonIntoFile(content, filePath);
+        assertEquals(expResult, result);
+       
+    }
 //
 //    /**
 //     * Test of roundTo5 method, of class Utilitaire.
@@ -452,8 +504,8 @@ public class UtilitaireTest {
     }
     
     @Test
-     public void testRoundTo5Vegatif() throws Exception {
-        System.out.println("roundTo5");
+     public void testRoundTo5Negatif() throws Exception {
+        System.out.println("roundTo5Negatif");
         double i = -2.02;
         double v = 0.05;
         String expResult = "-2.00";
@@ -462,9 +514,24 @@ public class UtilitaireTest {
        
     }
      
+ @Test(expected = java.text.ParseException.class)
+      public void testRoundTo5ParseException() throws Exception {
+        System.out.println("roundTo5ParseException");
+         NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
+         
+        String str = "a,2";
+        double i = nf.parse(str).doubleValue();
+        double v = 0.05;
+        
+        String expResult = "5.05";
+        String result = Utilitaire.roundTo5(i, v);
+        assertEquals(expResult, result);
+       
+    }
+     
      @Test
       public void testRoundTo5ChiffreDejaArrondi() throws Exception {
-        System.out.println("roundTo5");
+        System.out.println("roundTo5ChiffreDejaArrondi");
         double i = 5.05;
         double v = 0.05;
         String expResult = "5.05";
