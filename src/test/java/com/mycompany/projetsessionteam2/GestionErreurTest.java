@@ -158,16 +158,54 @@ public class GestionErreurTest {
 //    /**
 //     * Test of verifierNombreDroitsPassage method, of class GestionErreur.
 //     */
-//    @Test
-//    public void testVerifierNombreDroitsPassage() throws Exception {
+//@Test
+//    public void testVerifierNombreDroitsPassage0() throws Exception {
 //        System.out.println("verifierNombreDroitsPassage");
-//        JSONObject terrain = null;
-//        String filePath = "";
-//        GestionErreur.verifierNombreDroitsPassage(terrain, filePath);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNormal.json", "jsonTest/sortieTestNb0.json");
+//        JSONObject terrain =Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/testNbrePassages.json";
+//        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
 //    }
-
+//@Test
+//    public void testVerifierNombreDroitsPassagePlusQue10() throws Exception {
+//        System.out.println("verifierNombreDroitsPassage");
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeTestNbDroitsPassagePlusQue10.json", "jsonTest/sortieTesPlus10.json");
+//        JSONObject terrain =Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/testNbrePassagesPlusQue10.json";
+//        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
+//    }
+@Test
+    public void testVerifierNombreDroitsPassagePasEntie() throws Exception {
+        System.out.println("verifierNombreDroitsPassage");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeTestNbDroitsPassagePasEntie.json", "jsonTest/sortieTestDansInterval.json");
+        JSONObject terrain =Utilitaire.creerJsonObject(str);
+        String filePath = "jsonTest/testNbrePassagesPasEntie.json";
+        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
+    }
+//@Test
+//    public void testVerifierNombreDroitsPassageNegatif() throws Exception {
+//        System.out.println("verifierNombreDroitsPassage");
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeTestNbDroitsPassageNegatif.json", "jsonTest/sortieTestNegatif.json");
+//        JSONObject terrain =Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/testNbrePassagesNegatif.json";
+//        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
+//    }
+//@Test
+//    public void testVerifierNombreDroitsPassageEnter0Et10() throws Exception {
+//        System.out.println("verifierNombreDroitsPassage");
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNormal.json", "jsonTest/sortieTestNbEnter0Et10.json");
+//        JSONObject terrain =Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/testNbrePassages.json";
+//        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
+//    }
+//@Test
+//    public void testVerifierNombreDroitsPassage10() throws Exception {
+//        System.out.println("verifierNombreDroitsPassage");
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNormal.json", "jsonTest/sortieTestNb10.json");
+//        JSONObject terrain =Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/testNbrePassages.json";
+//        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );      
+//    }
     /**
      * Test of verifierNombreservices method, of class GestionErreur.
      */
