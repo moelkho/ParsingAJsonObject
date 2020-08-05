@@ -8,6 +8,7 @@ package com.mycompany.projetsessionteam2;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -66,33 +67,42 @@ public class GestionErreurTest {
 //
 //    }
     
-    @Test
-    public void testVerifierNombreservicesNegatif() throws Exception{
-        System.out.println("verifierNombreservices");
-        JSONObject terrain = new JSONObject();
-        
-        
-        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbrServicesNegatif.json", "jsonTest/ErreurFichierEntree.json");
-
-        terrain = Utilitaire.creerJsonObject(str);
-
-        String filePath = "jsonTest/sortieNbrServiceNegatif.json";
-        
-        GestionErreur.verifierNombreservices(terrain, filePath);
-
-    }
+//    @Test
+//    public void testVerifierNombreservicesNegatif() throws Exception{
+//        System.out.println("verifierNombreservices");
+//        JSONObject terrain = new JSONObject();
+//        
+//        
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbrServicesNegatif.json", "jsonTest/ErreurFichierEntree.json");
+//
+//        terrain = Utilitaire.creerJsonObject(str);
+//
+//        String filePath = "jsonTest/sortieNbrServiceNegatif.json";
+//        
+//        GestionErreur.verifierNombreservices(terrain, filePath);
+//
+//    }
 //
 //    /**
 //     * Test of verifierNbreLot method, of class GestionErreur.
 //     */
-//    @Test
-//    public void testVerifierNbreLot() {
-//        System.out.println("verifierNbreLot");
-//        JSONObject terrain = null;
-//        GestionErreur.verifierNbreLot(terrain);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testVerifierNbreLotNull() throws IOException {
+        System.out.println("verifierNbreLot");
+        JSONObject terrain = new JSONObject();
+        
+        
+        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbreLotNull.json", "jsonTest/ErreurFichierEntree.json");
+
+        terrain = Utilitaire.creerJsonObject(str);
+
+//        terrain.getJSONArray("lotissements");
+//        JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+        
+         String filePath = "jsonTest/sortieNbreLotNull.json";
+         GestionErreur.verifierNbreLot(terrain, filePath);
+
+    }
 //
 //    /**
 //     * Test of verifierPrixNegatif method, of class GestionErreur.
