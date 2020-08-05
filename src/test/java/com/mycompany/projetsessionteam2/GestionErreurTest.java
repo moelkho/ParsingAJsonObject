@@ -29,10 +29,11 @@ public class GestionErreurTest {
     public void testVerifierCreationFichierSortie() throws IOException {
         System.out.println("verifierCreationFichierSortie");
         File file = new File("jsonTest/testCreation.json");
+        String filePath = "jsonTest/sortieErreur.json";
         FileWriter fw = new FileWriter(file);
         fw.write("TestCreationFichierSortie");
         
-        GestionErreur.verifierCreationFichierSortie(file);
+        GestionErreur.verifierCreationFichierSortie(file,filePath);
     }
 //
 //    /**

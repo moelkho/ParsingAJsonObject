@@ -14,13 +14,6 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
 
-       ClassLoader cl = ClassLoader.getSystemClassLoader();
-
-        URL[] urls = ((URLClassLoader)cl).getURLs();
-
-        for(URL url: urls){
-        	System.out.println(url.getFile());
-        }
        
         String json = null;
 
