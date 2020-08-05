@@ -39,18 +39,7 @@ public class UtilitaireTest {
        
     }
     
-    /* exception IOException */
-    
-      @Test(expected = IOException.class)
-    public void testLoadJsonIntoStringIOException() throws Exception {
-        System.out.println("loadJsonIntoString");
-        String filePath = "";
-        String fileSortie = "jsonTest/sortieTest.json";
-        String expResult = "{\"name\":\"admin\"}";
-        String result = Utilitaire.loadJsonIntoString(filePath,fileSortie);
-        assertEquals(expResult, result);
-       
-    }
+
     /**
      * Test of creerJsonObject method, of class Utilitaire.
      */
@@ -64,10 +53,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
     
     }
-//
-//    /**
-//     * Test of obtenirTypeTerrain method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of obtenirTypeTerrain method, of class Utilitaire.
+     */
     @Test
     public void testObtenirTypeTerrain()  {
         System.out.println("obtenirTypeTerrain");
@@ -93,10 +82,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of obtenirPrixMax method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of obtenirPrixMax method, of class Utilitaire.
+     */
     @Test
     public void testObtenirPrixMax() {
         System.out.println("obtenirPrixMax");
@@ -122,10 +111,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
         
     }
-//
-//    /**
-//     * Test of obtenirLot method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of obtenirLot method, of class Utilitaire.
+     */
     @Test
     public void testObtenirLot() {
         System.out.println("obtenirLot");
@@ -143,10 +132,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
         
     }
-//
-//    /**
-//     * Test of calculerValeurFonciereParLot method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerValeurFonciereParLot method, of class Utilitaire.
+     */
     @Test
     public void testCalculerValeurFonciereParLot() {
         System.out.println("calculerValeurFonciereParLot");
@@ -158,10 +147,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of cumulerValFinanciereParLot method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of cumulerValFinanciereParLot method, of class Utilitaire.
+     */
     @Test
     public void testCumulerValFinanciereParLot() {
         System.out.println("cumulerValFinanciereParLot");
@@ -172,10 +161,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of creerLotSortie method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of creerLotSortie method, of class Utilitaire.
+     */
     @Test
     public void testCreerLotSortie() throws Exception {
         System.out.println("creerLotSortie");
@@ -187,10 +176,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
         
     }
-//
-//    /**
-//     * Test of ajouterLotSortieAuLotissementSortie method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of ajouterLotSortieAuLotissementSortie method, of class Utilitaire.
+     */
     @Test
     public void testAjouterLotSortieAuLotissementSortie() {
         System.out.println("ajouterLotSortieAuLotissementSortie");
@@ -199,10 +188,10 @@ public class UtilitaireTest {
         Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
         
     }
-//
-//    /**
-//     * Test of calculerValFonciereFinal method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerValFonciereFinal method, of class Utilitaire.
+     */
     @Test
     public void testCalculerValFonciereFinal() {
         System.out.println("calculerValFonciereFinal");
@@ -212,10 +201,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of calculerTaxeScolaire method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerTaxeScolaire method, of class Utilitaire.
+     */
     @Test
     public void testCalculerTaxeScolaire() {
         System.out.println("calculerTaxeScolaire");
@@ -225,10 +214,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of calculerTaxeMunicipale method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerTaxeMunicipale method, of class Utilitaire.
+     */
     @Test
     public void testCalculerTaxeMunicipale() {
         System.out.println("calculerTaxeMunicipale");
@@ -238,10 +227,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
         
     }
-//
-//    /**
-//     * Test of creerJsonObjectDeSortie method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of creerJsonObjectDeSortie method, of class Utilitaire.
+     */
     @Test
     public void testCreerJsonObjectDeSortie() throws Exception {
         System.out.println("creerJsonObjectDeSortie");
@@ -262,10 +251,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
         
     }
-//
-//    /**
-//     * Test of calculerMontantValeurParLot method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerMontantValeurParLot method, of class Utilitaire.
+     */
     @Test
     public void testCalculerMontantValeurParLot0() throws IOException {
         System.out.println("calculerMontantValeurParLot0");
@@ -312,10 +301,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
       
     }
-//
-//    /**
-//     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
+     */
     @Test
     public void testCalculerMontantDroitsPassage1() {
         System.out.println("calculerMontantDroitsPassage1");
@@ -354,10 +343,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
        
     }
-//
-//    /**
-//     * Test of calculerMontantServices method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of calculerMontantServices method, of class Utilitaire.
+     */
      @Test
     public void testCalculerMontantServices2AvecSuperficie500Etmoins() {
         System.out.println("calculerMontantServicesSuperficie500Etmoins");
@@ -469,10 +458,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result, 0.0);
      
     }
-//
-//    /**
-//     * Test of saveJsonIntoFile method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of saveJsonIntoFile method, of class Utilitaire.
+     */
     @Test
     public void testSaveJsonIntoFile() throws Exception {
         System.out.println("saveJsonIntoFile");
@@ -488,10 +477,10 @@ public class UtilitaireTest {
         assertEquals(expResult, result);
        
     }
-//
-//    /**
-//     * Test of roundTo5 method, of class Utilitaire.
-//     */
+
+    /**
+     * Test of roundTo5 method, of class Utilitaire.
+     */
     @Test
     public void testRoundTo5() throws Exception {
         System.out.println("roundTo5");

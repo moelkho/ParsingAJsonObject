@@ -24,16 +24,16 @@ public class GestionErreurTest {
 
     /**
      * Test of verifierCreationFichierSortie method, of class GestionErreur.
-//     */
-//    @Test
-//    public void testVerifierCreationFichierSortie() throws IOException {
-//        System.out.println("verifierCreationFichierSortie");
-//        File file = new File("jsonTest/testCreation.json");
-//        FileWriter fw = new FileWriter(file);
-//        fw.write("TestCreationFichierSortie");
-//        
-//        GestionErreur.verifierCreationFichierSortie(file);
-//    }
+     */
+  @Test
+    public void testVerifierCreationFichierSortie() throws IOException {
+        System.out.println("verifierCreationFichierSortie");
+        File file = new File("jsonTest/testCreation.json");
+        FileWriter fw = new FileWriter(file);
+        fw.write("TestCreationFichierSortie");
+       
+        GestionErreur.verifierCreationFichierSortie(file);
+    }
 //
 //    /**
 //     * Test of verifierNombreDroitsPassage method, of class GestionErreur.
@@ -165,18 +165,18 @@ public class GestionErreurTest {
 //    /**
 //     * Test of verifierSiDescriptionEstNull method, of class GestionErreur.
 //     */
-    @Test
-    public void testVerifierSiDescriptionEstNull() throws Exception {
-        System.out.println("verifierSiDescriptionEstNull");
-        JSONObject terrain = new JSONObject();
-        
-        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeDescriptionEstNull.json", "jsonTest/ErreurFichierEntree.json");
-        terrain = Utilitaire.creerJsonObject(str);
-        String filePath = "jsonTest/sortieDescriptionEstNull.json";
-
-        GestionErreur.verifierSiDescriptionEstNull(terrain, filePath);
-
-    }
+//    @Test
+//    public void testVerifierSiDescriptionEstNull() throws Exception {
+//        System.out.println("verifierSiDescriptionEstNull");
+//        JSONObject terrain = new JSONObject();
+//        
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeDescriptionEstNull.json", "jsonTest/ErreurFichierEntree.json");
+//        terrain = Utilitaire.creerJsonObject(str);
+//        String filePath = "jsonTest/sortieDescriptionEstNull.json";
+//
+//        GestionErreur.verifierSiDescriptionEstNull(terrain, filePath);
+//
+//    }
 
 //
 //    /**
