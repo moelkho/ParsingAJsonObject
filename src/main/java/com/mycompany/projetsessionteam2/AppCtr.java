@@ -20,6 +20,7 @@ public class AppCtr {
         JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
 
         JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
+       
 
         try {
             GestionErreur.verifierTypeTerrain(terrain , "json/" + args[1]);
@@ -38,11 +39,12 @@ public class AppCtr {
 
         
         int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
-        System.out.println(typeTerrain);
+        
         double prixMin = Utilitaire.obtenirPrixMin(terrain);
         double prixMax = Utilitaire.obtenirPrixMax(terrain);
 
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
+        System.out.println(lotissement);
         
         
         
@@ -62,11 +64,11 @@ public class AppCtr {
         }
 
         double valFociereFinalTerrain = Utilitaire.calculerValFonciereFinal(valFociereTerrainInitial);
-        System.out.println(valFociereFinalTerrain);
+        
         double taxeScolaire = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
-        System.out.println(taxeScolaire);
+        
         double taxeMunicipale = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
-        System.out.println(taxeMunicipale);
+        
 
         JSONObject sortie;
         sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);

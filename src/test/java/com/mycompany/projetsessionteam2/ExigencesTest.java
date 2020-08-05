@@ -26,10 +26,10 @@ public class ExigencesTest {
     @Test
     public void testFormaterVariables() throws IOException {
         System.out.println("formaterVariables");
-        String json = Utilitaire.loadJsonIntoString("jsonTest/entree.json");
+        String json = Utilitaire.loadJsonIntoString("jsonTest/entree.json","jsonTest/sortieTest.json");
         JSONObject jsonObject1 =  Utilitaire.creerJsonObject(json);
         
-        String json2 = Utilitaire.loadJsonIntoString("jsonTest/resultaEntreAttendu.json");
+        String json2 = Utilitaire.loadJsonIntoString("jsonTest/resultaEntreAttendu.json","jsonTest/sortieTest.json");
         
         JSONObject expResult = Utilitaire.creerJsonObject(json2);
         JSONObject result = Exigences.formaterVariables(jsonObject1);
