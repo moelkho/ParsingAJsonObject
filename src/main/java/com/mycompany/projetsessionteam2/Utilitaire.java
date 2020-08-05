@@ -231,8 +231,8 @@ public class Utilitaire {
         return montantServices;
     }
 
-   public static File saveJsonIntoFile(String content, String filePath) 
-            throws IOException {
+   public static File saveJsonIntoFile(String content, String filePath) throws IOException 
+             {
 
         File file = new File(filePath);
         FileUtils.writeStringToFile(file, content, "UTF-8");

@@ -64,7 +64,7 @@ public class AppCtr {
            
             valFociereTerrainInitial = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
             JSONObject lotSortie = Utilitaire.creerLotSortie(lot, valFonciereParLot);
-            System.out.println(lotSortie);
+            
             
             Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
         }
@@ -81,10 +81,10 @@ public class AppCtr {
         JSONObject sortie;
         sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
         
-        System.out.println(sortie);
+        
         try {
             File file = Utilitaire.saveJsonIntoFile(sortie.toString(), "json/" + args[1]);
-            System.out.println(file);
+           
 
 //            //Tester la creation du fichier de sortie
 //            file.delete();
@@ -94,9 +94,7 @@ public class AppCtr {
             System.exit(0);
         }
                
-        double i = -2.02;
-        String j =Utilitaire.roundTo5(i, 0.05);
-        System.out.println(j);
+        
        
         
     }
