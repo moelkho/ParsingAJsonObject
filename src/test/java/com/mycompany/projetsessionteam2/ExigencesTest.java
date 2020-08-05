@@ -6,6 +6,9 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.junit.Test;
@@ -61,4 +64,18 @@ public class ExigencesTest {
         assertEquals(expResult, result, 0.0);
        
     }
+    
+   
+    
+     @Test(expected = ParseException.class)
+    public void testFormaterMontantParseException() throws ParseException {
+        System.out.println("formaterMontant");
+        String valeur = "a,2";
+        NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
+        double expResult = nf.parse(valeur).doubleValue();
+        double result = Exigences.formaterMontant(valeur);
+        assertEquals(expResult, result, 0.0);
+       
+    }
+    
 }

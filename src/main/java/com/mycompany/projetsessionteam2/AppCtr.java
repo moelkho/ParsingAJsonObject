@@ -2,6 +2,8 @@ package com.mycompany.projetsessionteam2;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +14,13 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
 
+       ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+
+        for(URL url: urls){
+        	System.out.println(url.getFile());
+        }
        
         String json = null;
 
@@ -44,7 +53,7 @@ public class AppCtr {
         double prixMax = Utilitaire.obtenirPrixMax(terrain);
 
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
-        System.out.println(lotissement);
+        
         
         
         
@@ -54,18 +63,24 @@ public class AppCtr {
         for (int i = 0; i < lotissement.size(); i++) {
 
             JSONObject lot = Utilitaire.obtenirLot(lotissement, i);
+            
             valeurParLot = Utilitaire.calculerMontantValeurParLot(typeTerrain, lot, prixMin, prixMax);
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
+           
             valFociereTerrainInitial = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
             JSONObject lotSortie = Utilitaire.creerLotSortie(lot, valFonciereParLot);
+            System.out.println(lotSortie);
+            
             Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
         }
 
         double valFociereFinalTerrain = Utilitaire.calculerValFonciereFinal(valFociereTerrainInitial);
+      
         
         double taxeScolaire = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
+        
         
         double taxeMunicipale = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
         
