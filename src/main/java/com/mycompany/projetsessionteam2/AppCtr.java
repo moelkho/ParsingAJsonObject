@@ -31,6 +31,7 @@ public class AppCtr {
             GestionErreur.verifierNombreDroitsPassage(terrain, "json/" + args[1]);
             GestionErreur.verifierNombreservices(terrain , "json/" + args[1]);
             GestionErreur.verifierSuperficie(terrain , "json/" + args[1]);
+            GestionErreur.verifierFormatDates(terrain, "json/" + args[1]);
         } catch (IOException ex) {
             Logger.getLogger(AppCtr.class.getName()).log(Level.SEVERE, null, ex);
         }

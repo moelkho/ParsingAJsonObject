@@ -20,48 +20,6 @@
 		"nombre_se rvices": 3,
 		"superficie": 3333,
 		"date_Me sure": "2013-06-20"
-	}, {
-		"description": "lot 4",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
-	}, {
-		"description": "lot 5",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
-	}, {
-		"description": "lot 6",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
-	}, {
-		"description": "lot 7",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
-	}, {
-		"description": "lot 8",
-		"nombre_droits_passage": 8,
-		"nombre_se rvices": 3,
-		"superficie": 3333,
-		"date_Me sure": "2013-06-20"
-	}, {
-		"description": "lot 9",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
-	}, {
-		"description": "lot 10",
-		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
-		"date_mesure": "2015-12-15"
 	}
     ]
 }
