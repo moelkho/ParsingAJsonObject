@@ -106,16 +106,23 @@ public class UtilitaireTest {
 //    /**
 //     * Test of obtenirLot method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testObtenirLot() {
-//        System.out.println("obtenirLot");
-//        JSONArray lotissement = null;
-//        int i = 0;
-//        JSONObject expResult = null;
-//        JSONObject result = Utilitaire.obtenirLot(lotissement, i);
-//        assertEquals(expResult, result);
-//        
-//    }
+    @Test
+    public void testObtenirLot() {
+        System.out.println("obtenirLot");
+        JSONArray lotissement = JSONArray.fromObject("[{\"description\":\"lot 1\""
+                + ",\"nombre_droits_passage\":4,\"nombre_services\":1,\"superficie\""
+                + ":465,\"date_mesure\":\"2015-10-14\"},"
+                + "{\"description\":\"lot 2\",\"nombre_droits_passage\":0,"
+                + "\"nombre_services\":1,\"superficie\":1082,\"date_mesure\":"
+                + "\"2015-12-15\"}]");
+        int i = 1;
+        JSONObject expResult = JSONObject.fromObject("{\"description\":\"lot 2\","
+                + "\"nombre_droits_passage\":0,\"nombre_services\":1,\"superficie\""
+                + ":1082,\"date_mesure\":\"2015-12-15\"}");
+        JSONObject result = Utilitaire.obtenirLot(lotissement, i);
+        assertEquals(expResult, result);
+        
+    }
 //
 //    /**
 //     * Test of calculerValeurFonciereParLot method, of class Utilitaire.
@@ -163,14 +170,14 @@ public class UtilitaireTest {
 //    /**
 //     * Test of ajouterLotSortieAuLotissementSortie method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testAjouterLotSortieAuLotissementSortie() {
-//        System.out.println("ajouterLotSortieAuLotissementSortie");
-//        JSONObject lotSortie = null;
-//        JSONArray lotissementSortie = null;
-//        Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
-//        
-//    }
+    @Test
+    public void testAjouterLotSortieAuLotissementSortie() {
+        System.out.println("ajouterLotSortieAuLotissementSortie");
+        JSONObject lotSortie = JSONObject.fromObject("{\"nom\":\"admin\"}");
+        JSONArray lotissementSortie = new JSONArray();
+        Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
+        
+    }
 //
 //    /**
 //     * Test of calculerValFonciereFinal method, of class Utilitaire.
@@ -214,18 +221,26 @@ public class UtilitaireTest {
 //    /**
 //     * Test of creerJsonObjectDeSortie method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCreerJsonObjectDeSortie() throws Exception {
-//        System.out.println("creerJsonObjectDeSortie");
-//        JSONArray lotissementSortie = null;
-//        double valFociereFinalTerrain = 0.0;
-//        double taxeScolaire = 0.0;
-//        double taxeMunicipale = 0.0;
-//        JSONObject expResult = null;
-//        JSONObject result = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
-//        assertEquals(expResult, result);
-//        
-//    }
+    @Test
+    public void testCreerJsonObjectDeSortie() throws Exception {
+        System.out.println("creerJsonObjectDeSortie");
+        JSONArray lotissementSortie = JSONArray.fromObject("[{\"description\":\""
+                + "lot 1\",\"valeur_par_lot\":\"1783.40 $\"},{\"description\":\""
+                + "lot 2\",\"valeur_par_lot\":\"4232.90 $\"},{\"description\":\""
+                + "lot 3\",\"valeur_par_lot\":\"7399.35 $\"},{\"description\":\""
+                + "lot 4\",\"valeur_par_lot\":\"4232.90 $\"},{\"description\":\""
+                + "lot 5\",\"valeur_par_lot\":\"4232.90 $\"},{\"description\":\""
+                + "lot 6\",\"valeur_par_lot\":\"4232.90 $\"}]");
+        double valFociereFinalTerrain = 26848.10;
+        double taxeScolaire = 322.20;
+        double taxeMunicipale = 671.25;
+        String str = Utilitaire.loadJsonIntoString("jsonTest/objetDeSortie.json");
+        JSONObject expResult = null;
+        expResult = Utilitaire.creerJsonObject(str);
+        JSONObject result = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
+        assertEquals(expResult, result);
+        
+    }
 //
 //    /**
 //     * Test of calculerMontantValeurParLot method, of class Utilitaire.
@@ -249,17 +264,17 @@ public class UtilitaireTest {
 //    /**
 //     * Test of calculerMontantDroitsPassage method, of class Utilitaire.
 //     */
-//    @Test
-//    public void testCalculerMontantDroitsPassage() {
-//        System.out.println("calculerMontantDroitsPassage");
-//        int type_terrain = 0;
-//        double valeurParLot = 0.0;
-//        JSONObject lot = null;
-//        double expResult = 0.0;
-//        double result = Utilitaire.calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
-//        assertEquals(expResult, result, 0.0);
-//       
-//    }
+    @Test
+    public void testCalculerMontantDroitsPassage() {
+        System.out.println("calculerMontantDroitsPassage");
+        int type_terrain = 1;
+        double valeurParLot = 2.5;
+        JSONObject lot = JSONObject.fromObject("{\"nombre_droits_passage\": 4}");
+        double expResult = 499;
+        double result = Utilitaire.calculerMontantDroitsPassage(type_terrain, valeurParLot, lot);
+        assertEquals(expResult, result, 0.0);
+       
+    }
 //
 //    /**
 //     * Test of calculerMontantServices method, of class Utilitaire.
@@ -284,8 +299,10 @@ public class UtilitaireTest {
 //    public void testSaveJsonIntoFile() throws Exception {
 //        System.out.println("saveJsonIntoFile");
 //        String content = "";
-//        String filePath = "";
-//        File expResult = null;
+//        String filePath = "C:/Users/admin/AppData/Local/Temp/"
+//                + "testSaveFile.json7526381794529581659test";
+//        File expResult = File.createTempFile("/jsonTest/testSaveFile.json", "");
+//       
 //        File result = Utilitaire.saveJsonIntoFile(content, filePath);
 //        assertEquals(expResult, result);
 //       

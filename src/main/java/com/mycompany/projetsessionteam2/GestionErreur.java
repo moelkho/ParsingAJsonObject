@@ -270,7 +270,9 @@ public class GestionErreur {
                 message = "la description du lot "+(i+1)+" est vide !";
             }
             i++;
-        }
+        } 
+         System.out.println(" la description du lot est vide ! "); 
+        
         JSONObject erreur = new JSONObject();
         if (isNull){
             erreur.accumulate("message", message);
@@ -299,11 +301,13 @@ public class GestionErreur {
                     isUnique = true;
                     message = "La description '"+description2+"' du lot "+(j+1)+" doit etre unique !";
                     break;
-                }
+                                   }
                 j++;
             }
             i++;
-        }
+        } 
+        System.out.println(" La description doit etre unique ! ");
+        
         JSONObject erreur = new JSONObject();
         if (isUnique){
             erreur.accumulate("message", message);

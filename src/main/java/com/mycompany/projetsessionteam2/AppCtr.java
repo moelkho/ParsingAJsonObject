@@ -52,6 +52,8 @@ public class AppCtr {
 
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
         
+        
+        
         double valFonciereParLot, valFociereTerrainInitial = 0, valeurParLot, montantDroitsPassage, montantServices;
         JSONArray lotissementSortie = new JSONArray();
 
@@ -64,9 +66,10 @@ public class AppCtr {
             
 
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
+            
 
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
-            System.out.println(montantServices);
+          
             
 
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
@@ -80,13 +83,16 @@ public class AppCtr {
         }
 
         double valFociereFinalTerrain = Utilitaire.calculerValFonciereFinal(valFociereTerrainInitial);
+        System.out.println(valFociereFinalTerrain);
         double taxeScolaire = Utilitaire.calculerTaxeScolaire(valFociereFinalTerrain);
+        System.out.println(taxeScolaire);
         double taxeMunicipale = Utilitaire.calculerTaxeMunicipale(valFociereFinalTerrain);
+        System.out.println(taxeMunicipale);
 
         JSONObject sortie;
         sortie = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
-//        System.out.println(sortie);
-
+        
+        System.out.println(sortie);
         try {
             File file = Utilitaire.saveJsonIntoFile(sortie.toString(), "json/" + args[1]);
             System.out.println(file);
@@ -98,11 +104,11 @@ public class AppCtr {
             System.out.println("Le fichier de sortie '" + args[1] + "' n'a pas été crée");
             System.exit(0);
         }
-        System.out.println("test jenkins");
-        
+               
         double i = -2.02;
         String j =Utilitaire.roundTo5(i, 0.05);
         System.out.println(j);
+       
         
     }
 }
