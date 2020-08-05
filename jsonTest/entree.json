@@ -1,8 +1,8 @@
 {
-	"type_Te rrain": 0,
+	"type_terrain": 0,
 	"prix_m2_min": "3,45 $",
 	"prix_m2_max": "7,00 $",
-	"lotissemenTS": [{
+	"lotissementS": [{
 		"description": "lot 1",
 		"nombrE_droits_passage": 4,
 		"nombre_services": 1,

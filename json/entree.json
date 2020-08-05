@@ -1,18 +1,18 @@
 {
-	"type_Te rrain": 0,
+	"type_terrain": 1,
 	"prix_m2_min": "3,45 $",
 	"prix_m2_max": "7,00 $",
-	"lotissemenTS": [{
+	"lotissements": [{
 		"description": "lot 1",
-		"nombrE_droits_passage": 4,
+		"nombre_droits_passage": 4,
 		"nombre_services": 1,
-		"super ficie": 465,
+		"superficie": 465,
 		"date_mesure": "2015-10-14"
 	}, {
 		"description": "lot 2",
 		"nombre_droits_passage": 0,
-		"nombre_Services": 1,
-		"super ficie": 1082,
+		"nombre_services": 1,
+		"superficie": 1082,
 		"date_mesure": "2015-12-15"
 	}, {
 		"description": "lot 3",
@@ -24,19 +24,19 @@
 		"description": "lot 4",
 		"nombre_droits_passage": 0,
 		"nombre_Services": 1,
-		"super ficie": 1082,
+		"superficie": 1082,
 		"date_mesure": "2015-12-15"
 	}, {
 		"description": "lot 5",
 		"nombre_droits_passage": 0,
 		"nombre_Services": 1,
-		"super ficie": 1082,
+		"superficie": 1082,
 		"date_mesure": "2015-12-15"
 	}, {
 		"description": "lot 6",
 		"nombre_droits_passage": 0,
 		"nombre_Services": 1,
-		"super ficie": 1082,
+		"superficie": 1082,
 		"date_mesure": "2015-12-15"
 	}
     ]
