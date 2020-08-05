@@ -5,7 +5,7 @@
 	"lotissements": [{
 		"description": "lot 1",
 		"nombre_droits_passage": 4,
-		"nombre_services": 0,
+		"nombre_services": 10,
 		"superficie": 465,
 		"date_mesure": "2015-10-14"
 	}, {
