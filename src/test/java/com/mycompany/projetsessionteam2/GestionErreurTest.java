@@ -99,18 +99,18 @@ public class GestionErreurTest {
 //         GestionErreur.verifierNbreLot(terrain, filePath);
 //    }
     
-    @Test
-    public void testVerifierNbreLotSup10() throws IOException {
-        System.out.println("verifierNbreLot");
-        JSONObject terrain = new JSONObject();
-
-        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbreLotSup10.json", "jsonTest/ErreurFichierEntree.json");
-
-        terrain = Utilitaire.creerJsonObject(str);
-
-         String filePath = "jsonTest/sortieNbreLotSup10.json";
-         GestionErreur.verifierNbreLot(terrain, filePath);
-    }
+//    @Test
+//    public void testVerifierNbreLotSup10() throws IOException {
+//        System.out.println("verifierNbreLot");
+//        JSONObject terrain = new JSONObject();
+//
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNbreLotSup10.json", "jsonTest/ErreurFichierEntree.json");
+//
+//        terrain = Utilitaire.creerJsonObject(str);
+//
+//         String filePath = "jsonTest/sortieNbreLotSup10.json";
+//         GestionErreur.verifierNbreLot(terrain, filePath);
+//    }
     
 //
 //    /**
@@ -165,15 +165,19 @@ public class GestionErreurTest {
 //    /**
 //     * Test of verifierSiDescriptionEstNull method, of class GestionErreur.
 //     */
-//    @Test
-//    public void testVerifierSiDescriptionEstNull() throws Exception {
-//        System.out.println("verifierSiDescriptionEstNull");
-//        JSONObject terrain = null;
-//        String filePath = "";
-//        GestionErreur.verifierSiDescriptionEstNull(terrain, filePath);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testVerifierSiDescriptionEstNull() throws Exception {
+        System.out.println("verifierSiDescriptionEstNull");
+        JSONObject terrain = new JSONObject();
+        
+        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeDescriptionEstNull.json", "jsonTest/ErreurFichierEntree.json");
+        terrain = Utilitaire.creerJsonObject(str);
+        String filePath = "jsonTest/sortieDescriptionEstNull.json";
+
+        GestionErreur.verifierSiDescriptionEstNull(terrain, filePath);
+
+    }
+
 //
 //    /**
 //     * Test of verifierSiDescriptionEstUnique method, of class GestionErreur.
