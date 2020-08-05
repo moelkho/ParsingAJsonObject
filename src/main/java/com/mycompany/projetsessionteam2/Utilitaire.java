@@ -196,7 +196,7 @@ public class Utilitaire {
         superficie = lot.getDouble("superficie");
 
         //traitement terrain residentiel
-        if (type_terrain == TAUXPASSAGERESIDENTIEL) {
+        if (type_terrain == TERRAINRESIDENTIEL) {
             
             if (superficie > SUPERFICIEMAX) 
                 montantServices = MONTANTSERVICE2 * nbreDeService;
@@ -205,7 +205,7 @@ public class Utilitaire {
         } 
         
         //traitement terrain commercial
-        else if (type_terrain == TAUXPASSAGECOMMERCIAL) {
+        else if (type_terrain == TERRAINCOMMERCIAL) {
             if (superficie <= SUPERFICIEMIN) 
                 montantServices = MONTANTSERVICE1 * nbreDeService;
             else 

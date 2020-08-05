@@ -26,23 +26,24 @@ public class AppCtr {
         JSONObject terrain = Exigences.formaterVariables(jsonObjectNonFormated);
 
         try {
+            
             GestionErreur.verifierExistanceCleJson(terrain, "json/" + args[1]);
+            
             GestionErreur.verifierNombreDroitsPassage(terrain, "json/" + args[1]);
             GestionErreur.verifierSiDescriptionEstNull(terrain, "json/" + args[1]);
             GestionErreur.verifierSiDescriptionEstUnique(terrain, "json/" + args[1]);
+            GestionErreur.verifierNombreservices(terrain , "json/" + args[1]);
+            GestionErreur.verifierTypeTerrain(terrain , "json/" + args[1]);
+            GestionErreur.verifierNbreLot(terrain ,"json/" + args[1]);
+            GestionErreur.verifierPrixNegatif(terrain , "json/" + args[1]);
+            GestionErreur.verifierSuperficie(terrain , "json/" + args[1]);
         } catch (IOException ex) {
             Logger.getLogger(AppCtr.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        GestionErreur.verifierNombreservices(terrain);
+        
 
-        GestionErreur.verifierTypeTerrain(terrain);
-
-        GestionErreur.verifierNbreLot(terrain);
-
-        GestionErreur.verifierPrixNegatif(terrain);
-
-        GestionErreur.verifierSuperficieNegative(terrain);
+       
 
         int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
         System.out.println(typeTerrain);
@@ -65,7 +66,7 @@ public class AppCtr {
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
 
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
-            ;
+            System.out.println(montantServices);
             
 
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);

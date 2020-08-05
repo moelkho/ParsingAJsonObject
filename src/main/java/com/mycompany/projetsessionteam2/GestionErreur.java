@@ -21,35 +21,6 @@ public class GestionErreur {
     }
    }
      
-//     public static void verifierNombreDroitsPassage(JSONObject terrain , String filePath) throws IOException{
-//     
-//         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
-//         JSONObject lot;
-//         double nbreDroitsPassage;
-//         String description;
-//         for(int i = 0 ; i < lotissements.size() ; i++){
-//             lot = Utilitaire.obtenirLot(lotissements, i);
-//             nbreDroitsPassage = lot.getDouble("nombre_droits_passage");
-//             description = lot.getString("description");
-//             JSONObject erreur = new JSONObject();
-//             if( nbreDroitsPassage > 10){
-//                 erreur.accumulate("message", "Le nombre de droits de passage du "+description+" est supérieur à 10 !");
-//                 Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
-//                 System.out.println("message : Le nombre de droits de passage du "+description+" est supérieur à 10 !");
-//                 System.exit(0);
-//             }
-//             else if (nbreDroitsPassage < 0){
-//                 System.out.println("message : Le nombre de droits de passage du "+description+" est négatif !");
-//                 System.exit(0);
-//             }
-//             else if(nbreDroitsPassage != (int) nbreDroitsPassage){
-//                 System.out.println("message : Le nombre de droits de passage du "+description+" doit etre un nombre entier !");
-//                 System.exit(0);
-//             }
-//            
-//         }
-//    
-//     }
      
      public static void verifierNombreDroitsPassage(JSONObject terrain , String filePath) throws IOException{
      
@@ -88,97 +59,133 @@ public class GestionErreur {
          
      }
      
-     public static void verifierNombreservices(JSONObject terrain){
+     public static void verifierNombreservices(JSONObject terrain ,  String filePath) throws IOException{
      
          JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
          JSONObject lot;
          double nbreService;
-         String description;
-         for(int i = 0 ; i < lotissements.size() ; i++){
+         String description, message = null;
+         boolean estNonConforme = false;
+         int i =0;
+         while (estNonConforme == false && i<lotissements.size()) {             
              lot = Utilitaire.obtenirLot(lotissements, i);
              nbreService = lot.getDouble("nombre_services");
              description = lot.getString("description");
-             if( nbreService > 5){
-                 System.out.println("message : Le nombre de services du "+description+" est supérieur à 5 !");
-                 System.exit(0);
+              if( nbreService > 5){
+                message = "message : Le nombre de services du "+description+" est supérieur à 5 !"; 
+                estNonConforme = true;
+                
              }
              else if (nbreService < 0){
-                 System.out.println("message : Le nombre de services du "+description+" est négatif !");
-                 System.exit(0);
+                message = "message : Le nombre de services du "+description+" est négatif !";
+                estNonConforme = true;
+                 
              }
               else if(nbreService != (int) nbreService){
-                 System.out.println("message : Le nombre de service du "+description+" doit etre un nombre entier !");
-                 System.exit(0);
+                message = "message : Le nombre de service du "+description+" doit etre un nombre entier !";
+                estNonConforme = true;
+                
              }
+              i++;
          }
+         JSONObject erreur = new JSONObject();
+         if(estNonConforme == true){
+         erreur.accumulate("message", message);
+         Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+         System.exit(0);
+         
+     }
      }
      
      
-     public static void verifierNbreLot(JSONObject terrain){
+     public static void verifierNbreLot(JSONObject terrain , String filePath) throws IOException{
      
+         boolean estNonConforme = false;
          JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
- 
-         if(lotissements.size() == 0)
-         {
-             System.out.println("message : Le terrain ne contient aucun lot, un terrain doit avoir au moins un lot !");
-             System.exit(0);         
+         String message = null;
+         if(lotissements.isEmpty()){
+             message = "Le terrain ne contient aucun lot, un terrain doit avoir au moins un lot !";
+             estNonConforme = true;        
          }
          else if(lotissements.size() > 10){
-             System.out.println("message : Le terrain contient "+lotissements.size()+" lots, un terrain doit avoir au maximum 10 lots !");
-             System.exit(0);     
+              message = "Le terrain contient "+lotissements.size()+" lots, un terrain doit avoir au maximum 10 lots !";
+              estNonConforme = true; 
          }
+         
+         JSONObject erreur = new JSONObject();
+         if(estNonConforme == true){
+         erreur.accumulate("message", message);
+         Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+         System.exit(0);
+      }   
      }
      
      
-     public static void  verifierPrixNegatif(JSONObject terrain){
-         String signPrixMin = terrain.getString("prix_m2_min").substring(0, 1);
-         String signPrixMax = terrain.getString("prix_m2_max").substring(0, 1);
-        
-        if(signPrixMax.equals("-"))
-            {
-                System.out.println("Le prix max ne peut pas être négatif !");
-                System.exit(0);         
-            }
-        if(signPrixMin.equals("-"))
-            {
-                System.out.println("Le prix min ne peut pas être négatif !");
-                System.exit(0);         
-            }
- 
+    public static void verifierPrixNegatif(JSONObject terrain , String filePath) throws IOException{
+        String signPrixMin = terrain.getString("prix_m2_min").substring(0, 1);
+        String signPrixMax = terrain.getString("prix_m2_max").substring(0, 1);
+        String message = null;
+        boolean estNonConforme = false;
+         
+        if(signPrixMax.equals("-")){
+                message = "Le prix max ne peut pas être négatif !";
+                estNonConforme = true;
+        }
+        if(signPrixMin.equals("-")){
+                message = "Le prix min ne peut pas être négatif !";
+                estNonConforme = true;
+        }
+        JSONObject erreur = new JSONObject();
+        if(estNonConforme){
+        erreur.accumulate("message", message);
+        Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+        System.exit(0);
+    }
     }
      
      
-     public static void verifierSuperficieNegative(JSONObject terrain){
+    public static void verifierSuperficie(JSONObject terrain , String filePath) throws IOException{
      
-         JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
-         JSONObject lot;
-         double superficie;
-         String description;
-         for(int i = 0 ; i < lotissements.size() ; i++){
-             lot = Utilitaire.obtenirLot(lotissements, i);
-             superficie = lot.getDouble("superficie");
-             description = lot.getString("description");
-             
-             if( superficie < 0){
-                 System.out.println("message : La superficie du "+description+" est négative !");
-                 System.exit(0);
-             }
-             else if (superficie > 50000){
-                 System.out.println("message: La superficie du "+description+" est supérieure à 50000 m2 !");
-                 System.exit(0);
-                 
-             }
-         }
-     }
+        JSONArray lotissements = Utilitaire.recupererLotissement(terrain);
+        JSONObject lot;
+        double superficie;
+        String description, message = null;
+        boolean estNonConforme = false;
+        int i = 0;
+        while(!estNonConforme && i<lotissements.size()){
+           lot = Utilitaire.obtenirLot(lotissements, i);
+           superficie = lot.getDouble("superficie");
+           description = lot.getString("description"); 
+           if( superficie < 0){
+               message = "La superficie du "+description+" est négative !";
+               estNonConforme = true; 
+            }
+            else if (superficie > 50000){
+               message = "La superficie du "+description+" est supérieure à 50000 m2 !";
+               estNonConforme = true;                 
+            }
+        i++;
+        }
+        
+        JSONObject erreur = new JSONObject();
+        if(estNonConforme){
+        erreur.accumulate("message", message);
+        Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+        System.exit(0);
+    }
+}
      
-     public static void verifierTypeTerrain(JSONObject terrain ){
+     public static void verifierTypeTerrain(JSONObject terrain , String filePath) throws IOException{
           
         int typeTerrain = terrain.getInt("type_terrain");
-         
-         if(!(typeTerrain == 0 || typeTerrain == 1 || typeTerrain == 2)){
-                 System.out.println("message : le type de terrain doit prendre la valeur 0, 1 ou 2 !");
-                 System.exit(0);}
-           
+        String message; 
+        if(!(typeTerrain == 0 || typeTerrain == 1 || typeTerrain == 2)){
+            message = "message : le type de terrain doit prendre la valeur 0, 1 ou 2 !";
+            JSONObject erreur = new JSONObject();
+            erreur.accumulate("message", message);
+            Utilitaire.saveJsonIntoFile(erreur.toString(), filePath);
+            System.exit(0);
+           }  
      }
      
      public static void verifierExistanceCleJson(JSONObject terrain , String filePath) throws IOException {
@@ -275,7 +282,6 @@ public class GestionErreur {
      public static void verifierSiDescriptionEstUnique(JSONObject terrain , String filePath) throws IOException{
      
         JSONArray lotissement = Utilitaire.recupererLotissement(terrain);
-         System.out.println(lotissement.size());
         JSONObject lot;
         boolean isUnique = false;
         String description1, description2, message = "";
@@ -283,7 +289,7 @@ public class GestionErreur {
         while(isUnique == false && i < lotissement.size()){
             lot = Utilitaire.obtenirLot(lotissement, i);
             description1 = lot.getString("description");
-            System.out.println("sortie de la boucle");
+            
             j = i+1;
             while(isUnique == false && j < lotissement.size()){
                 lot = Utilitaire.obtenirLot(lotissement, j);
