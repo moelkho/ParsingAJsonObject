@@ -2,6 +2,8 @@ package com.mycompany.projetsessionteam2;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +14,13 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
 
+       ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+
+        for(URL url: urls){
+        	System.out.println(url.getFile());
+        }
        
         String json = null;
 
