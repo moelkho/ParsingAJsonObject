@@ -6,6 +6,8 @@
 package com.mycompany.projetsessionteam2;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import net.sf.json.JSONObject;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,12 +25,13 @@ public class GestionErreurTest {
      * Test of verifierCreationFichierSortie method, of class GestionErreur.
      */
     @Test
-    public void testVerifierCreationFichierSortie() {
+    public void testVerifierCreationFichierSortie() throws IOException {
         System.out.println("verifierCreationFichierSortie");
-        File file = null;
+        File file = new File("jsonTest/testCreation.json");
+        FileWriter fw = new FileWriter(file);
+        fw.write("TestCreationFichierSortie");
+        
         GestionErreur.verifierCreationFichierSortie(file);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
