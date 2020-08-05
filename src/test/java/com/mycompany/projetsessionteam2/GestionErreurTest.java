@@ -24,14 +24,15 @@ public class GestionErreurTest {
     /**
      * Test of verifierCreationFichierSortie method, of class GestionErreur.
 //     */
-//    @Test
-//    public void testVerifierCreationFichierSortie() {
-//        System.out.println("verifierCreationFichierSortie");
-//        File file = null;
-//        GestionErreur.verifierCreationFichierSortie(file);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testVerifierCreationFichierSortie() throws IOException {
+        System.out.println("verifierCreationFichierSortie");
+        File file = new File("jsonTest/testCreation.json");
+        FileWriter fw = new FileWriter(file);
+        fw.write("TestCreationFichierSortie");
+        
+        GestionErreur.verifierCreationFichierSortie(file);
+    }
 //
 //    /**
 //     * Test of verifierNombreDroitsPassage method, of class GestionErreur.
@@ -50,12 +51,19 @@ public class GestionErreurTest {
 //     * Test of verifierNombreservices method, of class GestionErreur.
 //     */
 //    @Test
-//    public void testVerifierNombreservices() {
+//    public void testVerifierNombreservices() throws Exception{
 //        System.out.println("verifierNombreservices");
-//        JSONObject terrain = null;
-//        GestionErreur.verifierNombreservices(terrain);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        JSONObject terrain = new JSONObject();
+//        
+//        
+//        String str = Utilitaire.loadJsonIntoString("jsonTest/entree_1.json", "jsonTest/ErreurFichierEntree.json");
+//
+//        terrain = Utilitaire.creerJsonObject(str);
+//
+//        String filePath = "jsonTest/NbrService.json";
+//        
+//        GestionErreur.verifierNombreservices(terrain, filePath);
+//
 //    }
 //
 //    /**
