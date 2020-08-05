@@ -12,14 +12,10 @@ public class AppCtr {
 
     public static void main(String[] args) throws ParseException {
 
-        System.out.println("test pour jenkins +++");
+       
         String json = null;
-        try {
-            json = Utilitaire.loadJsonIntoString("json/" + args[0]);
-        } catch (IOException e1) {
-            System.out.println("Le fichier d'entrée spécifié '" + args[0] + "' est introuvable");
-            System.exit(0);
-        }
+
+        json = Utilitaire.loadJsonIntoString("json/" + args[0] , "json/" + args[1]);
 
         JSONObject jsonObjectNonFormated = Utilitaire.creerJsonObject(json);
 
@@ -27,24 +23,20 @@ public class AppCtr {
        
 
         try {
+            GestionErreur.verifierTypeTerrain(terrain , "json/" + args[1]);
+            GestionErreur.verifierPrixNegatif(terrain , "json/" + args[1]);
+            GestionErreur.verifierNbreLot(terrain ,"json/" + args[1]);
             GestionErreur.verifierExistanceCleJson(terrain, "json/" + args[1]);
-            GestionErreur.verifierNombreDroitsPassage(terrain, "json/" + args[1]);
             GestionErreur.verifierSiDescriptionEstNull(terrain, "json/" + args[1]);
             GestionErreur.verifierSiDescriptionEstUnique(terrain, "json/" + args[1]);
+            GestionErreur.verifierNombreDroitsPassage(terrain, "json/" + args[1]);
+            GestionErreur.verifierNombreservices(terrain , "json/" + args[1]);
+            GestionErreur.verifierSuperficie(terrain , "json/" + args[1]);
         } catch (IOException ex) {
             Logger.getLogger(AppCtr.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        GestionErreur.verifierNombreservices(terrain);
-
-        GestionErreur.verifierTypeTerrain(terrain);
-
-        GestionErreur.verifierNbreLot(terrain);
-
-        GestionErreur.verifierPrixNegatif(terrain);
-
-        GestionErreur.verifierSuperficieNegative(terrain);
-
+        
         int typeTerrain = Utilitaire.obtenirTypeTerrain(terrain);
         
         double prixMin = Utilitaire.obtenirPrixMin(terrain);
@@ -61,26 +53,11 @@ public class AppCtr {
         for (int i = 0; i < lotissement.size(); i++) {
 
             JSONObject lot = Utilitaire.obtenirLot(lotissement, i);
-            
-            
             valeurParLot = Utilitaire.calculerMontantValeurParLot(typeTerrain, lot, prixMin, prixMax);
-            
-
             montantDroitsPassage = Utilitaire.calculerMontantDroitsPassage(typeTerrain, valeurParLot, lot);
-            
-
             montantServices = Utilitaire.calculerMontantServices(typeTerrain, lot);
-            
-            System.out.println(montantServices);
-          
-            
-
             valFonciereParLot = Utilitaire.calculerValeurFonciereParLot(valeurParLot, montantDroitsPassage, montantServices);
-            
-            
-
             valFociereTerrainInitial = Utilitaire.cumulerValFinanciereParLot(valFonciereParLot, valFociereTerrainInitial);
-
             JSONObject lotSortie = Utilitaire.creerLotSortie(lot, valFonciereParLot);
             Utilitaire.ajouterLotSortieAuLotissementSortie(lotSortie, lotissementSortie);
         }

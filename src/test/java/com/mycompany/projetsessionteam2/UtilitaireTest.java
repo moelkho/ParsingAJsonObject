@@ -28,8 +28,9 @@ public class UtilitaireTest {
     public void testLoadJsonIntoString() throws Exception {
         System.out.println("loadJsonIntoString");
         String filePath = "jsonTest/test1.json";
+        String fileSortie = "jsonTest/sortieTest.json";
         String expResult = "{\"name\":\"admin\"}";
-        String result = Utilitaire.loadJsonIntoString(filePath);
+        String result = Utilitaire.loadJsonIntoString(filePath,fileSortie);
         assertEquals(expResult, result);
        
     }
@@ -96,7 +97,7 @@ public class UtilitaireTest {
     @Test
     public void testRecupererLotissement() throws IOException {
         System.out.println("recupererLotissement");
-        String str = Utilitaire.loadJsonIntoString("jsonTest/obtenirLotissementTest.json");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/obtenirLotissementTest.json","jsonTest/sortieTest.json");
         JSONObject terrain = Utilitaire.creerJsonObject(str);
         JSONArray expResult = JSONArray.fromObject("[{\"description\":\"lot 1\""
                 + ",\"nombre_droits_passage\":4,\"nombre_services\":1,\"superficie\":465,\"date_mesure\":\"2015-10-14\"}]");
@@ -236,7 +237,7 @@ public class UtilitaireTest {
         double valFociereFinalTerrain = 26848.10;
         double taxeScolaire = 322.20;
         double taxeMunicipale = 671.25;
-        String str = Utilitaire.loadJsonIntoString("jsonTest/objetDeSortie.json");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/objetDeSortie.json","jsonTest/sortieTest.json");
         JSONObject expResult = null;
         expResult = Utilitaire.creerJsonObject(str);
         JSONObject result = Utilitaire.creerJsonObjectDeSortie(lotissementSortie, valFociereFinalTerrain, taxeScolaire, taxeMunicipale);
@@ -253,7 +254,7 @@ public class UtilitaireTest {
         int type_terrain = 0;
         
         JSONObject lot = new JSONObject();
-        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/testLot.json","jsonTest/sortieTest.json");
         lot = Utilitaire.creerJsonObject(str);
         double prixMin = 3.45;
         double prixMax = 7.0;

@@ -38,11 +38,24 @@ public class Utilitaire {
     
     
 
-    public static String loadJsonIntoString(String filePath) throws FileNotFoundException, IOException 
+    public static String loadJsonIntoString(String fileInPath ,  String fileOutPath)  
         {
-      
-        FileInputStream myInputStream = new FileInputStream(filePath);
-        return IOUtils.toString(myInputStream, "UTF-8");
+            String json = null, message = null;
+        try {
+            FileInputStream myInputStream = new FileInputStream(fileInPath);
+            json =  IOUtils.toString(myInputStream, "UTF-8");
+        } catch (IOException ex) {
+            JSONObject erreur = new JSONObject();
+            message = "Le fichier d'entrée spécifié est introuvable";
+            erreur.accumulate("message", message);
+                try {
+                    Utilitaire.saveJsonIntoFile(erreur.toString(), fileOutPath);
+                } catch (IOException ex1) {
+                    Logger.getLogger(Utilitaire.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            System.exit(0);
+        }
+        return json;
     }
     
     
