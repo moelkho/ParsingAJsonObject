@@ -48,8 +48,8 @@ public class ExigencesTest {
     @Test
     public void testFormaterMontant() {
         System.out.println("formaterMontant");
-        String valeur = "3,2";
-        double expResult = 3.2;
+        String valeur = "3,20";
+        double expResult = 3.20;
         double result = Exigences.formaterMontant(valeur);
         assertEquals(expResult, result, 0.0);
        
@@ -58,8 +58,8 @@ public class ExigencesTest {
     @Test
     public void testFormaterMontantValeurNegative() {
         System.out.println("formaterMontant");
-        String valeur = "-3,2";
-        double expResult = -3.2;
+        String valeur = "-3,20";
+        double expResult = -3.20;
         double result = Exigences.formaterMontant(valeur);
         assertEquals(expResult, result, 0.0);
        

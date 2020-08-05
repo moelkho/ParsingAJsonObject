@@ -76,8 +76,8 @@ public class UtilitaireTest {
     public void testObtenirPrixMin() {
         System.out.println("obtenirPrixMin");
         JSONObject terrain = new JSONObject();
-        terrain.put("prix_m2_min","2,6 $");
-        double expResult = 2.6;
+        terrain.put("prix_m2_min","2,60 $");
+        double expResult = 2.60;
         double result = Utilitaire.obtenirPrixMin(terrain);
         assertEquals(expResult, result, 0.0);
         
@@ -90,8 +90,8 @@ public class UtilitaireTest {
     public void testObtenirPrixMax() {
         System.out.println("obtenirPrixMax");
         JSONObject terrain = new JSONObject();
-        terrain.put("prix_m2_max","4,9 $");
-        double expResult = 4.9;
+        terrain.put("prix_m2_max","4,90 $");
+        double expResult = 4.90;
         double result = Utilitaire.obtenirPrixMax(terrain);
         assertEquals(expResult, result, 0.0);
         
