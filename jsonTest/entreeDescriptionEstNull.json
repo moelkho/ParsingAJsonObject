@@ -3,7 +3,7 @@
 	"prix_m2_min": "3,45 $",
 	"prix_m2_max": "7,00 $",
 	"lotissements": [{
-		"description": "lot 1",
+		"description": "",
 		"nombre_droits_passage": 4,
 		"nombre_services": 1,
 		"superficie": 465,
