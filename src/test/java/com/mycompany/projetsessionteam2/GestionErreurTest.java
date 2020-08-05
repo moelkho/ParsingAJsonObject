@@ -38,6 +38,15 @@ public class GestionErreurTest {
 //    /**
 //     * Test of verifierNombreDroitsPassage method, of class GestionErreur.
 //     */
+    
+    @Test
+    public void testVerifierNombreDroitsPassage0() throws Exception {
+        System.out.println("verifierNombreDroitsPassage");
+        String str = Utilitaire.loadJsonIntoString("jsonTest/entreeNormal.json", "jsonTest/sortieTestNb0.json");
+        JSONObject terrain =Utilitaire.creerJsonObject(str);
+        String filePath = "jsonTest/testNbrePassages.json";
+        GestionErreur.verifierNombreDroitsPassage(terrain,filePath );     
+    }
 //    @Test
 //    public void testVerifierNombreDroitsPassage() throws Exception {
 //        System.out.println("verifierNombreDroitsPassage");
